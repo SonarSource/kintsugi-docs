@@ -23,6 +23,7 @@ All application data is stored in `~/.kintsugi/` directory:
 SQLite database containing:
 
 **Task Data:**
+
 - Prompt text
 - Git context (repository path, branch name, commit SHA)
 - File paths changed
@@ -32,41 +33,48 @@ SQLite database containing:
 - Session associations
 
 **Epic Data:**
+
 - Epic titles and descriptions
 - Task associations
 - AI-generated summaries
 - Status derived from tasks
 
 **Session Data:**
+
 - Session IDs from Claude CLI
 - Start/end timestamps
 - Repository and branch context
 - Total token consumption
 
 **Analysis Data:**
-- SonarLint analysis results
+
+- SonarQube for IDE analysis results
 - Issue details (type, severity, message, location)
 - Rule information
 - Timestamps of analyses
 
 **Integration Data:**
+
 - SonarQube credentials (encrypted)
 - JIRA credentials (encrypted)
 - GitHub tokens (encrypted)
 - Project bindings and mappings
 
 **Approval Data:**
+
 - Tool approval requests
 - Your approval/denial decisions
 - Timestamps and parameters
 
 **Repository Metadata:**
+
 - Local repository paths
 - Git remote URLs
 - Branch information
 - Last accessed timestamps
 
 **Telemetry Events** (if enabled):
+
 - Anonymous usage events
 - Device ID (random UUID)
 - Timestamps
@@ -75,11 +83,13 @@ SQLite database containing:
 #### Configuration Files
 
 **`config.json`**
+
 - Backend URL (default: `http://localhost:63421`)
 - Authentication token (auto-generated)
 - Log level
 
 **`desktop-config.json`**
+
 - UI preferences (theme, font size, etc.)
 - Window size and position
 - Integration credentials
@@ -91,12 +101,14 @@ SQLite database containing:
 **`task-snapshots/tasks/{taskId}/`**
 
 For each task, before/after snapshots of edited files:
+
 - Original file content (`.before`)
 - Modified file content (`.after`)
 - Full file contents, not just diffs
 - Preserves all code including sensitive data
 
 **Important:** Snapshots may contain:
+
 - Sensitive code
 - API keys or credentials in files
 - Proprietary algorithms
@@ -105,18 +117,21 @@ For each task, before/after snapshots of edited files:
 #### Log Files
 
 **`local-backend.log`**
+
 - Backend server activity
 - API requests and responses
 - Database operations
 - Error messages
 
 **`hook-debug.log`**
+
 - Hook execution logs
 - Git operations
 - Snapshot creation
 - API communication
 
 **Logs may contain:**
+
 - File paths
 - Git branch names
 - Error stack traces
@@ -127,12 +142,14 @@ For each task, before/after snapshots of edited files:
 Kintsugi reads (but doesn't store) data from Claude CLI:
 
 **Transcript Logs** (`~/.claude/logs/`)
+
 - API request/response pairs
 - Token usage statistics
 - Model information
 - Session metadata
 
 **Settings** (`~/.claude/settings.json`)
+
 - Hook registrations
 - Claude CLI configuration
 
@@ -152,15 +169,18 @@ Kintsugi **reads** these files but **never modifies** them (except for hook regi
 All communication between desktop app and backend is on localhost:
 
 **Task Operations:**
+
 - Task CRUD operations
 - Epic management
 - Session tracking
 
 **Analysis Requests:**
-- File content for SonarLint analysis
+
+- File content for SonarQube for IDE analysis
 - Analysis results
 
 **Hook Events:**
+
 - Prompt text
 - Git context
 - File snapshots
@@ -173,12 +193,14 @@ All communication between desktop app and backend is on localhost:
 #### SonarQube (Optional)
 
 **What's Sent:**
+
 - Authentication token
 - Project key
 - File content for analysis
 - Language information
 
 **What's Received:**
+
 - Quality profiles
 - Rule definitions
 - Analysis results
@@ -188,10 +210,12 @@ All communication between desktop app and backend is on localhost:
 #### JIRA (Optional)
 
 **What's Sent:**
+
 - Authentication credentials
 - Ticket key for lookup
 
 **What's Received:**
+
 - Ticket metadata (status, assignee, description, etc.)
 - Comments (if enabled)
 
@@ -200,11 +224,13 @@ All communication between desktop app and backend is on localhost:
 #### GitHub (Optional)
 
 **What's Sent:**
+
 - Personal access token
 - Repository owner/name
 - API requests for repository data
 
 **What's Received:**
+
 - Repository metadata
 - Branch information
 
@@ -215,6 +241,7 @@ All communication between desktop app and backend is on localhost:
 Kintsugi **does not** communicate with Anthropic directly. All Claude interactions go through Claude CLI, which handles API communication.
 
 **Indirect Access:**
+
 - Kintsugi reads transcript logs to calculate token usage
 - Never sends data to Anthropic servers
 - Never accesses your API key
@@ -224,6 +251,7 @@ Kintsugi **does not** communicate with Anthropic directly. All Claude interactio
 If telemetry is enabled, anonymous usage data is sent to telemetry backend:
 
 **What's Sent:**
+
 - Device ID (random UUID, not linked to identity)
 - Event type (e.g., "task_created", "approval_granted")
 - Timestamp
@@ -231,6 +259,7 @@ If telemetry is enabled, anonymous usage data is sent to telemetry backend:
 - Basic metrics (task count, session duration)
 
 **What's NOT Sent:**
+
 - Prompt text
 - Code content
 - File paths
@@ -239,12 +268,14 @@ If telemetry is enabled, anonymous usage data is sent to telemetry backend:
 - IP address (not logged)
 
 **Purpose:**
+
 - Understand feature usage
 - Identify bugs and crashes
 - Improve user experience
 - Prioritize development
 
 **Control:**
+
 - Disable in Settings → Privacy → Telemetry
 - Or set environment variable: `KINTSUGI_DISABLE_TELEMETRY=true`
 
@@ -253,17 +284,20 @@ If telemetry is enabled, anonymous usage data is sent to telemetry backend:
 ### Storage Security
 
 **File System Permissions:**
+
 - `~/.kintsugi/` directory is user-read-write only (700)
 - Database file: 600 permissions
 - Config files: 600 permissions
 - Logs: 644 permissions
 
 **Encryption:**
+
 - Database: Not encrypted at rest (SQLite limitation)
 - Credentials: Encrypted using OS keychain (planned)
 - Network: All external communication over HTTPS
 
 **Access Control:**
+
 - Only your user account can access Kintsugi data
 - Backend binds to localhost only (127.0.0.1)
 - No external network exposure
@@ -271,16 +305,19 @@ If telemetry is enabled, anonymous usage data is sent to telemetry backend:
 ### Credential Storage
 
 **Current Implementation:**
+
 - Credentials stored in `desktop-config.json`
 - Base64 encoded (not encrypted)
 - File has restricted permissions (600)
 
 **Planned Enhancement:**
+
 - OS keychain integration
 - Hardware encryption support
 - Vault integration option
 
 **Best Practices:**
+
 - Use tokens with minimal required permissions
 - Rotate tokens regularly
 - Don't share your `~/.kintsugi/` directory
@@ -289,11 +326,13 @@ If telemetry is enabled, anonymous usage data is sent to telemetry backend:
 ### Network Security
 
 **Local Communication:**
+
 - Backend on localhost only
 - Authentication via bearer token
 - Token auto-generated on first run
 
 **External Communication:**
+
 - HTTPS for all external integrations
 - Certificate validation enforced
 - Token-based authentication
@@ -304,43 +343,52 @@ If telemetry is enabled, anonymous usage data is sent to telemetry backend:
 ### Automatic Retention
 
 **Tasks:**
+
 - Stored indefinitely by default
 - No automatic deletion
 
 **Snapshots:**
+
 - Stored indefinitely by default
 - Can grow large over time
 
 **Logs:**
+
 - Rotated when exceeding 10MB
 - Last 5 log files kept
 
 **Telemetry:**
+
 - Stored on telemetry backend for 90 days
 - Then automatically deleted
 
 ### Manual Cleanup
 
 **Delete Individual Tasks:**
+
 - Click task → Delete
 - Removes task and associated snapshots
 
 **Archive Old Tasks:**
+
 - Bulk archive completed tasks
 - Moves to archive table
 - Reduces active data size
 
 **Clear Snapshots:**
+
 ```bash
 rm -rf ~/.kintsugi/task-snapshots/
 ```
 
 **Vacuum Database:**
+
 ```bash
 sqlite3 ~/.kintsugi/local.db "VACUUM"
 ```
 
 **Clear Logs:**
+
 ```bash
 rm ~/.kintsugi/*.log
 ```
@@ -350,21 +398,25 @@ rm ~/.kintsugi/*.log
 ### Export Data
 
 **Export Tasks:**
+
 - Settings → Data → Export Tasks
 - Exports to JSON or CSV
 - Includes all task metadata
 
 **Export Configuration:**
+
 - Settings → Advanced → Export Configuration
 - Saves all settings to JSON
 - Portable to other machines
 
 **Database Backup:**
+
 ```bash
 cp ~/.kintsugi/local.db ~/backup/kintsugi-backup-$(date +%Y%m%d).db
 ```
 
 **Snapshots Backup:**
+
 ```bash
 tar -czf ~/backup/snapshots-$(date +%Y%m%d).tar.gz ~/.kintsugi/task-snapshots/
 ```
@@ -372,14 +424,17 @@ tar -czf ~/backup/snapshots-$(date +%Y%m%d).tar.gz ~/.kintsugi/task-snapshots/
 ### Import Data
 
 **Import Tasks:**
+
 - Settings → Data → Import Tasks
 - Supports JSON and CSV formats
 
 **Import Configuration:**
+
 - Settings → Advanced → Import Configuration
 - Restores settings from exported JSON
 
 **Database Restore:**
+
 ```bash
 cp ~/backup/kintsugi-backup-20240101.db ~/.kintsugi/local.db
 ```
@@ -389,6 +444,7 @@ cp ~/backup/kintsugi-backup-20240101.db ~/.kintsugi/local.db
 ### Remove Application Data
 
 **Uninstall Kintsugi:**
+
 ```bash
 # macOS
 rm -rf ~/Applications/Kintsugi.app
@@ -406,6 +462,7 @@ rm -rf ~/.kintsugi/
 ```
 
 **Unregister Hooks:**
+
 ```bash
 kintsugi unregister-hooks
 ```
@@ -413,6 +470,7 @@ kintsugi unregister-hooks
 Edit `~/.claude/settings.json` to verify hooks removed.
 
 **Delete Plugin:**
+
 ```bash
 npm uninstall -g @kintsugi/plugin
 ```
@@ -420,14 +478,17 @@ npm uninstall -g @kintsugi/plugin
 ### Remove Integration Data
 
 **SonarQube:**
+
 - Settings → SonarQube → Disconnect
 - Manually revoke token in SonarQube
 
 **JIRA:**
+
 - Settings → JIRA → Disconnect
 - Manually revoke token in Atlassian Account
 
 **GitHub:**
+
 - Settings → GitHub → Disconnect
 - Manually revoke token in GitHub Settings
 
@@ -438,32 +499,39 @@ npm uninstall -g @kintsugi/plugin
 Kintsugi respects GDPR principles:
 
 **Right to Access:**
+
 - All data is stored locally and accessible to you
 - Export features provide structured access
 
 **Right to Erasure:**
+
 - Delete individual tasks or all data
 - Uninstall removes all local data
 
 **Right to Portability:**
+
 - Export to standard formats (JSON, CSV)
 - Database is SQLite (open format)
 
 **Right to Rectification:**
+
 - Edit task data directly
 - Modify any stored information
 
 **Data Minimization:**
+
 - Only essential data is stored
 - No unnecessary collection
 
 **Purpose Limitation:**
+
 - Data used only for stated purposes
 - No secondary use without consent
 
 ### No Personal Information Collection
 
 Kintsugi **does not** collect:
+
 - Name
 - Email (except for integration credentials)
 - IP address
@@ -476,11 +544,13 @@ Kintsugi **does not** collect:
 ### Code and Secrets
 
 **Risk:** File snapshots may contain:
+
 - API keys
 - Passwords
 - Secrets in code
 
 **Recommendations:**
+
 1. **Use .env files** - Keep secrets in environment variables
 2. **Never commit secrets** - Use `.gitignore` for sensitive files
 3. **Review snapshots** - Check what's being captured
@@ -488,6 +558,7 @@ Kintsugi **does not** collect:
 5. **Use secret managers** - Store secrets in vault systems
 
 **Auto-Detection:** (Planned)
+
 - Detect common secret patterns
 - Warn before capturing sensitive files
 - Option to exclude from snapshots
@@ -495,14 +566,17 @@ Kintsugi **does not** collect:
 ### Third-Party Access
 
 **SonarQube:**
+
 - If you send files for analysis, SonarQube server receives file content
 - Check your organization's SonarQube data policy
 
 **JIRA:**
+
 - Only ticket metadata is fetched
 - JIRA sees which tickets you access
 
 **GitHub:**
+
 - Only repository metadata is accessed
 - GitHub sees which repos you query
 
@@ -511,6 +585,7 @@ Kintsugi **does not** collect:
 ### What Telemetry Collects
 
 **Events Tracked:**
+
 - `app_started` - Application launch
 - `task_created` - Task creation
 - `task_completed` - Task completion
@@ -521,12 +596,14 @@ Kintsugi **does not** collect:
 - `integration_connected` - Integration setup
 
 **Metadata Included:**
+
 - Device ID (random UUID)
 - Timestamp
 - Event type
 - Basic counts (e.g., number of tasks)
 
 **Metadata NOT Included:**
+
 - Prompt text
 - Code content
 - File paths
@@ -542,6 +619,7 @@ Kintsugi **does not** collect:
    - Settings → Privacy → Disable Telemetry
 
 2. **Environment Variable:**
+
    ```bash
    export KINTSUGI_DISABLE_TELEMETRY=true
    ```
@@ -557,6 +635,7 @@ Kintsugi **does not** collect:
    ```
 
 **Verify Opt-Out:**
+
 ```bash
 grep telemetry ~/.kintsugi/config.json
 ```
@@ -568,22 +647,26 @@ No telemetry should be sent after disabling.
 ### Error Tracking (Sentry)
 
 **What's Sent:**
+
 - Error messages
 - Stack traces
 - Device ID
 - Version information
 
 **What's NOT Sent:**
+
 - User data
 - Code content
 - File paths (sanitized)
 
 **Purpose:**
+
 - Identify bugs
 - Improve stability
 - Prioritize fixes
 
 **Control:**
+
 - Settings → Privacy → Error Reporting
 - Disable to stop sending error reports
 
@@ -662,15 +745,15 @@ To maximize privacy and security:
 
 ## Summary
 
-- ✅ **All data stored locally** on your machine
-- ✅ **No cloud storage required** - works fully offline
-- ✅ **Optional integrations** - you control what connects
-- ✅ **Minimal telemetry** - anonymous, opt-out available
-- ✅ **Open architecture** - inspect data anytime
-- ✅ **User-controlled** - you own your data
-- ⚠️ **Credentials stored locally** - secure your machine
-- ⚠️ **Snapshots contain code** - may include secrets
-- ⚠️ **Integration data shared** - with services you connect
+- **All data stored locally** on your machine
+- **No cloud storage required** - works fully offline
+- **Optional integrations** - you control what connects
+- **Minimal telemetry** - anonymous, opt-out available
+- **Open architecture** - inspect data anytime
+- **User-controlled** - you own your data
+- **Credentials stored locally** - secure your machine
+- **Snapshots contain code** - may include secrets
+- **Integration data shared** - with services you connect
 
 Kintsugi is designed to respect your privacy while providing powerful development tools. Your data stays yours.
 

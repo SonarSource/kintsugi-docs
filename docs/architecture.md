@@ -31,9 +31,9 @@ Kintsugi follows a **local-first architecture** with five main components workin
         │ HTTP                              │ HTTP
         │                                   │
 ┌───────▼──────────────────┐    ┌───────────▼─────────────────┐
-│ SonarLint Bridge         │    │ Kintsugi CLI Plugin         │
+│ SonarQube for IDE Bridge         │    │ Kintsugi CLI Plugin         │
 │ (Port 8765)              │    │ (npm global package)        │
-│ (Java + SonarLint RPC)   │    │ (Node.js + TypeScript)      │
+│ (Java + SonarQube for IDE RPC)   │    │ (Node.js + TypeScript)      │
 │                          │    │                             │
 │ - Code Analysis          │    │ - Hook Scripts              │
 │ - Quality Profiles       │    │ - Snapshot Management       │
@@ -56,6 +56,7 @@ Kintsugi follows a **local-first architecture** with five main components workin
 ### 1. Desktop Application
 
 **Technology Stack**
+
 - Electron 39.3.0
 - React 18.3.1
 - TypeScript
@@ -67,16 +68,18 @@ Kintsugi follows a **local-first architecture** with five main components workin
 The main process manages the application lifecycle and native operations.
 
 **Responsibilities:**
+
 - Window management
 - Native menu creation
 - System tray integration
 - Backend process spawning
-- SonarLint Bridge spawning
+- SonarQube for IDE Bridge spawning
 - IPC communication with renderer
 - File system operations
 - Shell execution
 
 **Key Files:**
+
 - `main/index.ts` - Entry point and window creation
 - `main/services/backend-manager.ts` - Backend lifecycle
 - `main/services/sonarlint-manager.ts` - Bridge lifecycle
@@ -87,6 +90,7 @@ The main process manages the application lifecycle and native operations.
 The renderer process runs the React UI.
 
 **Responsibilities:**
+
 - User interface rendering
 - State management
 - API communication
@@ -96,6 +100,7 @@ The renderer process runs the React UI.
 - Diff visualization
 
 **Key Directories:**
+
 - `renderer/src/components/` - React components (23 categories)
 - `renderer/src/hooks/` - Custom React hooks (35+)
 - `renderer/src/contexts/` - Context providers (18+)
@@ -106,6 +111,7 @@ The renderer process runs the React UI.
 Secure bridge between main and renderer processes.
 
 **Security Model:**
+
 - Context isolation enabled
 - No direct Node.js access in renderer
 - IPC through exposed APIs only
@@ -114,6 +120,7 @@ Secure bridge between main and renderer processes.
 ### 2. Local Backend
 
 **Technology Stack**
+
 - Node.js 22+
 - Express
 - TypeScript
@@ -125,51 +132,56 @@ Secure bridge between main and renderer processes.
 The backend is a standalone Node.js process spawned by the desktop app.
 
 **Responsibilities:**
+
 - REST API server
 - WebSocket event broadcasting
 - SQLite database management
 - Token consumption calculation
-- SonarLint communication
+- SonarQube for IDE communication
 - Hook request processing
 - Session monitoring
 
 **API Routes** (14 modules)
 
-| Route | Purpose |
-|-------|---------|
-| `/api/tasks` | Task CRUD and queries |
-| `/api/epics` | Epic management |
-| `/api/sessions` | Session tracking |
-| `/api/hooks/*` | Hook event processing |
-| `/api/approval-requests` | Tool approvals |
-| `/api/sonarlint/*` | Code analysis |
-| `/api/sonarqube/*` | SonarQube integration |
-| `/api/jira/*` | JIRA integration |
+| Route                    | Purpose               |
+| ------------------------ | --------------------- |
+| `/api/tasks`             | Task CRUD and queries |
+| `/api/epics`             | Epic management       |
+| `/api/sessions`          | Session tracking      |
+| `/api/hooks/*`           | Hook event processing |
+| `/api/approval-requests` | Tool approvals        |
+| `/api/sonarlint/*`       | Code analysis         |
+| `/api/sonarqube/*`       | SonarQube integration |
+| `/api/jira/*`            | JIRA integration      |
 | `/api/user-repositories` | Repository management |
-| `/api/onboarding` | Setup wizards |
-| `/api/telemetry` | Event logging |
-| `/health` | Health checks |
+| `/api/onboarding`        | Setup wizards         |
+| `/api/telemetry`         | Event logging         |
+| `/health`                | Health checks         |
 
 **Database Schema**
 
 SQLite database with 12+ tables:
 
 **Core Tables:**
+
 - `tasks` - Task records with metadata
 - `epics` - Epic collections
 - `terminal_sessions` - Terminal tracking
 
 **Analysis Tables:**
+
 - `sonarlint_analyses` - Code analysis results
 - `task_consumption` - Token usage
 
 **Integration Tables:**
+
 - `sonarqube_credentials` - SQ connection info
 - `sonarqube_bindings` - Project bindings
 - `jira_credentials` - JIRA auth
 - `jira_tickets` - Cached ticket data
 
 **Workflow Tables:**
+
 - `approval_requests` - Tool approvals
 - `user_repositories` - Repository metadata
 - `telemetry_events` - Analytics
@@ -179,6 +191,7 @@ SQLite database with 12+ tables:
 Background services for async operations:
 
 **Consumption Service**
+
 - Parses Claude CLI transcript logs
 - Extracts token usage from API responses
 - Calculates costs using current pricing
@@ -186,17 +199,20 @@ Background services for async operations:
 - Runs every 30 seconds
 
 **Session Watcher**
+
 - Monitors Claude Code processes
 - Detects session start/end
 - Updates session status
 - Spawned as separate Node.js process
 
 **Job Queue**
+
 - Processes async tasks
 - Handles long-running operations
 - Retry logic for failures
 
 **SonarQube Sync Service**
+
 - Syncs quality profiles
 - Downloads rule definitions
 - Updates binding configuration
@@ -204,25 +220,28 @@ Background services for async operations:
 **Process Management**
 
 Backend runs as detached process:
+
 - PID stored in `~/.kintsugi/local-backend.pid`
 - Logs to `~/.kintsugi/local-backend.log`
 - Graceful shutdown on SIGTERM
 - Auto-restart on crash
 
-### 3. SonarLint Bridge
+### 3. SonarQube for IDE Bridge
 
 **Technology Stack**
+
 - Java 17+
 - Javalin (HTTP server)
-- SonarLint RPC Client
+- SonarQube for IDE RPC Client
 - Gson (JSON)
 - Maven (build)
 
 **Architecture**
 
-Java service wrapping SonarLint analysis engine.
+Java service wrapping SonarQube for IDE analysis engine.
 
 **Responsibilities:**
+
 - HTTP API for code analysis
 - Language analyzer management
 - SonarQube connected mode
@@ -231,13 +250,13 @@ Java service wrapping SonarLint analysis engine.
 
 **API Endpoints**
 
-| Endpoint | Purpose |
-|----------|---------|
-| `POST /analyze` | Analyze single file |
-| `POST /analyze-batch` | Analyze multiple files |
-| `POST /sync-quality-profile` | Sync from SonarQube |
-| `GET /supported-languages` | List languages |
-| `GET /health` | Health check |
+| Endpoint                     | Purpose                |
+| ---------------------------- | ---------------------- |
+| `POST /analyze`              | Analyze single file    |
+| `POST /analyze-batch`        | Analyze multiple files |
+| `POST /sync-quality-profile` | Sync from SonarQube    |
+| `GET /supported-languages`   | List languages         |
+| `GET /health`                | Health check           |
 
 **Analysis Flow**
 
@@ -266,6 +285,7 @@ Java service wrapping SonarLint analysis engine.
 **Connected Mode**
 
 When bound to SonarQube:
+
 - Uses server-defined quality profiles
 - Applies same rules as CI
 - Maintains consistency with team
@@ -280,6 +300,7 @@ When bound to SonarQube:
 **Process Management**
 
 Bridge runs as detached Java process:
+
 - PID tracked by desktop app
 - Logs written to stdout/stderr
 - Auto-restart on crash
@@ -288,6 +309,7 @@ Bridge runs as detached Java process:
 ### 4. Kintsugi CLI Plugin
 
 **Technology Stack**
+
 - Node.js
 - TypeScript
 - yargs (CLI parsing)
@@ -298,6 +320,7 @@ Bridge runs as detached Java process:
 npm global package with hook scripts.
 
 **Installation**
+
 ```bash
 npm install -g @kintsugi/plugin
 ```
@@ -306,16 +329,16 @@ npm install -g @kintsugi/plugin
 
 Eight hook types registered with Claude Code:
 
-| Hook | Trigger | Action |
-|------|---------|--------|
-| `UserPromptSubmit` | Prompt sent to Claude | Create task |
-| `PreToolUse` | Before tool execution | Capture file snapshot |
-| `PostToolUse` | After tool execution | Record tool use |
-| `Stop` | Claude pauses | Generate diff |
-| `SessionStart` | Session begins | Track session |
-| `SessionEnd` | Session ends | Move tasks to review |
-| `Notification` | Status message | Log notification |
-| `PermissionRequest` | Tool needs approval | Request approval |
+| Hook                | Trigger               | Action                |
+| ------------------- | --------------------- | --------------------- |
+| `UserPromptSubmit`  | Prompt sent to Claude | Create task           |
+| `PreToolUse`        | Before tool execution | Capture file snapshot |
+| `PostToolUse`       | After tool execution  | Record tool use       |
+| `Stop`              | Claude pauses         | Generate diff         |
+| `SessionStart`      | Session begins        | Track session         |
+| `SessionEnd`        | Session ends          | Move tasks to review  |
+| `Notification`      | Status message        | Log notification      |
+| `PermissionRequest` | Tool needs approval   | Request approval      |
 
 **Hook Execution Flow**
 
@@ -342,6 +365,7 @@ Eight hook types registered with Claude Code:
 **Snapshot Management**
 
 Before file edits:
+
 - Original content captured
 - Stored at `~/.kintsugi/task-snapshots/tasks/{taskId}/{filePath}.before`
 - After edits, `.after` file created
@@ -350,6 +374,7 @@ Before file edits:
 **Diff Generation**
 
 Uses git diff algorithm:
+
 - Unified diff format
 - Context lines (default 3)
 - Line numbers included
@@ -358,6 +383,7 @@ Uses git diff algorithm:
 **Git Integration**
 
 Utilities for git operations:
+
 - Detect repository root
 - Get current branch
 - Determine remote platform (GitHub/GitLab/Bitbucket)
@@ -368,6 +394,7 @@ Utilities for git operations:
 **SonarQube**
 
 Connected mode integration:
+
 - Token-based authentication
 - REST API v9.9+
 - Quality profile sync
@@ -376,6 +403,7 @@ Connected mode integration:
 **JIRA**
 
 Read-only ticket integration:
+
 - Token-based auth (Atlassian API)
 - Ticket metadata fetching
 - Comment reading (optional)
@@ -384,6 +412,7 @@ Read-only ticket integration:
 **GitHub**
 
 Pull request integration:
+
 - Personal access token
 - REST API v3
 - PR metadata
@@ -445,7 +474,7 @@ Pull request integration:
    │
    ├─ Desktop UI moves card to "In Progress"
    │
-7. Optional: SonarLint analysis triggered
+7. Optional: SonarQube for IDE analysis triggered
    │
    ├─ HTTP POST to bridge /analyze
    ├─ Results stored in database
@@ -566,20 +595,22 @@ Pull request integration:
 Between Electron main and renderer processes.
 
 **Security:**
+
 - Context isolation enabled
 - No direct Node.js access in renderer
 - Whitelist of allowed channels
 - Input validation on all messages
 
 **Pattern:**
+
 ```typescript
 // Renderer
-const result = await window.api.invoke('channel-name', arg1, arg2)
+const result = await window.api.invoke("channel-name", arg1, arg2);
 
 // Main
-ipcMain.handle('channel-name', async (event, arg1, arg2) => {
-  return result
-})
+ipcMain.handle("channel-name", async (event, arg1, arg2) => {
+  return result;
+});
 ```
 
 ### HTTP REST API
@@ -587,11 +618,13 @@ ipcMain.handle('channel-name', async (event, arg1, arg2) => {
 Between desktop/plugin and backend.
 
 **Authentication:**
+
 - Bearer token in Authorization header
 - Token auto-generated on first run
 - Stored in `~/.kintsugi/config.json`
 
 **Request Format:**
+
 ```http
 POST /api/tasks HTTP/1.1
 Host: localhost:63421
@@ -606,6 +639,7 @@ Content-Type: application/json
 ```
 
 **Response Format:**
+
 ```json
 {
   "success": true,
@@ -622,13 +656,15 @@ Content-Type: application/json
 Real-time updates via Socket.IO.
 
 **Connection:**
+
 ```typescript
-const socket = io('http://localhost:63421', {
-  auth: { token: authToken }
-})
+const socket = io("http://localhost:63421", {
+  auth: { token: authToken },
+});
 ```
 
 **Event Format:**
+
 ```typescript
 // Server broadcasts
 socket.emit('task:created', { task: {...} })
@@ -640,6 +676,7 @@ socket.on('task:created', (data) => {
 ```
 
 **Events:**
+
 - `task:created`
 - `task:updated`
 - `task:deleted`
@@ -709,6 +746,7 @@ socket.on('task:created', (data) => {
 ### Plugin Architecture
 
 Future plugin support planned:
+
 - Custom hook actions
 - UI extensions
 - Analysis engines
@@ -717,6 +755,7 @@ Future plugin support planned:
 ### API Extensibility
 
 REST API versioned for stability:
+
 - `/api/v1/*` - Current stable API
 - Backward compatibility maintained
 - Deprecation notices for changes

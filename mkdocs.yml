@@ -5,45 +5,58 @@ site_url: https://sonarsource.github.io/kintsugi-docs
 
 repo_name: SonarSource/kintsugi-docs
 repo_url: https://github.com/SonarSource/kintsugi-docs
-edit_uri: edit/main/docs/
+edit_uri: edit/master/docs/
 
 theme:
   name: material
+  custom_dir: overrides
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
-      primary: deep purple
-      accent: teal
+      primary: indigo
+      accent: indigo
       toggle:
         icon: material/brightness-7
         name: Switch to dark mode
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
-      primary: deep purple
-      accent: teal
+      primary: black
+      accent: indigo
       toggle:
         icon: material/brightness-4
-        name: Switch to light mode
+        name: Switch to system preference
   font:
-    text: Roboto
-    code: Roboto Mono
+    text: Inter
+    code: JetBrains Mono
+  icon:
+    logo: material/book-open-variant
+    repo: fontawesome/brands/github
   features:
-    - navigation.instant
-    - navigation.tracking
-    - navigation.tabs
-    - navigation.tabs.sticky
-    - navigation.sections
-    - navigation.expand
-    - navigation.path
+    #- header.sticky
+    # Navigation
+    - navigation.footer
     - navigation.indexes
+    # - navigation.instant
+    # - navigation.instant.prefetch
+    # - navigation.instant.progress
+    # - navigation.prune
+    - navigation.sections
+    - navigation.tabs
+    # - navigation.tabs.sticky
     - navigation.top
+    - navigation.tracking
+    # Search
     - search.suggest
     - search.highlight
     - search.share
+    # Table of Contents
     - toc.follow
+    - toc.integrate
+    # Content
     - content.code.copy
-    - content.action.edit
-    - content.action.view
+    - content.code.annotate
+    - content.tooltips
+    - content.tabs.link
 
 plugins:
   - search:
@@ -53,57 +66,96 @@ plugins:
       minify_html: true
 
 markdown_extensions:
+  # Admonitions
   - admonition
   - pymdownx.details
+  # Superfences for code blocks and diagrams
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid
           class: mermaid
-          format: !!python/name:pymdownx.superfences.fence_code_format
+          format:
+            !!python/name:pymdownx.superfences.fence_code_format # Tabbed content
+
+
   - pymdownx.tabbed:
       alternate_style: true
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
+  # Code highlighting
   - pymdownx.highlight:
       anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+      use_pygments: true
+      auto_title: true
   - pymdownx.inlinehilite
   - pymdownx.snippets
+  # Emoji support
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
-      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+      emoji_generator:
+        !!python/name:material.extensions.emoji.to_svg # Task lists
+
+
   - pymdownx.tasklist:
       custom_checkbox: true
+  # Tables
   - tables
+  # Attributes and HTML
   - attr_list
   - md_in_html
+  # Table of Contents
   - toc:
       permalink: true
+      permalink_title: Anchor link to this section
       toc_depth: 3
+  # Additional extensions for better formatting
+  - pymdownx.betterem
+  - pymdownx.caret
+  - pymdownx.mark
+  - pymdownx.tilde
+  - pymdownx.keys
+  - pymdownx.smartsymbols
+  - def_list
+  - footnotes
+  - abbr
 
 nav:
   - Home: index.md
   - Getting Started:
-    - Installation: getting-started.md
-    - Quick Reference: quick-reference.md
+      - Installation: getting-started.md
+      - Quick Reference: quick-reference.md
   - Core Features:
-    - Features Overview: features.md
-    - Workflows: workflows.md
-    - Configuration: configuration.md
+      - Features Overview: features.md
+      - Workflows: workflows.md
+      - Configuration: configuration.md
   - Integrations:
-    - Setup Guide: integrations.md
-    - SonarQube: integrations.md#sonarqube-integration
-    - JIRA: integrations.md#jira-integration
-    - GitHub: integrations.md#github-integration
+      - Setup Guide: integrations.md
+      - SonarQube: integrations.md#sonarqube-integration
+      - JIRA: integrations.md#jira-integration
+      - GitHub: integrations.md#github-integration
   - Advanced:
-    - Architecture: architecture.md
-    - Data & Privacy: data-privacy.md
+      - Architecture: architecture.md
+      - Data & Privacy: data-privacy.md
   - Help:
-    - Troubleshooting: troubleshooting.md
+      - Troubleshooting: troubleshooting.md
 
 extra:
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/SonarSource/kintsugi-docs
+      name: GitHub
+    - icon: fontawesome/brands/discord
+      link: https://discord.gg/sonarsource
+      name: Discord Community
   version:
     provider: mike
+  status:
+    new: Recently added
+    deprecated: Deprecated
+  generator: false
 
 extra_css:
   - stylesheets/extra.css

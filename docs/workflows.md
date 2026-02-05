@@ -10,18 +10,20 @@ The fundamental workflow for using Kintsugi with Claude Code.
 
 1. **Open Kintsugi**
    - Launch the application
-   - Backend and SonarLint Bridge start automatically
+   - Backend and SonarQube for IDE Bridge start automatically
 
 2. **Open Terminal**
    - Click terminal button or press `Ctrl/Cmd + ` `
    - Terminal opens at your last working directory
 
 3. **Navigate to Project**
+
    ```bash
    cd ~/projects/my-app
    ```
 
 4. **Submit Prompt to Claude**
+
    ```bash
    claude "Add input validation to the login form"
    ```
@@ -38,7 +40,7 @@ The fundamental workflow for using Kintsugi with Claude Code.
 7. **Review Changes**
    - Task moves to "Awaiting Input" when Claude pauses
    - Click "View Diff" to see changes
-   - Review SonarLint issues if any
+   - Review SonarQube for IDE issues if any
 
 8. **Provide Feedback**
    - Continue conversation with Claude if needed
@@ -66,6 +68,7 @@ Use epics to organize development of large features.
 
 2. **Break Down into Tasks**
    Submit separate prompts for each component:
+
    ```bash
    claude "Create user database schema with migrations"
    claude "Implement login API endpoint with JWT"
@@ -100,13 +103,13 @@ Use epics to organize development of large features.
 
 ## Code Quality Review Workflow
 
-Use SonarLint to ensure code quality as Claude makes changes.
+Use SonarQube for IDE to ensure code quality as Claude makes changes.
 
 ### Setup
 
-1. **Enable SonarLint**
-   - Settings → SonarLint
-   - Ensure SonarLint Bridge is running
+1. **Enable SonarQube for IDE**
+   - Settings → SonarQube for IDE
+   - Ensure SonarQube for IDE Bridge is running
    - Configure quality profiles if using SonarQube
 
 2. **Set Analysis Preferences**
@@ -117,7 +120,7 @@ Use SonarLint to ensure code quality as Claude makes changes.
 ### During Development
 
 1. **Claude Edits Files**
-   - SonarLint automatically analyzes changes
+   - SonarQube for IDE automatically analyzes changes
    - Issues detected in real-time
 
 2. **View Issues in Diff**
@@ -128,18 +131,19 @@ Use SonarLint to ensure code quality as Claude makes changes.
 3. **Review Issue Details**
    - **Type**: Bug, Vulnerability, Code Smell
    - **Severity**: Blocker, Critical, Major, Minor, Info
-   - **Rule**: SonarLint rule identifier
+   - **Rule**: SonarQube for IDE rule identifier
    - **Message**: What's wrong
    - **Remediation**: How to fix
 
 4. **Request Fixes**
    - If issues found, ask Claude to fix:
+
    ```bash
-   > Fix the SonarLint issues in the UserController
+   > Fix the SonarQube for IDE issues in the UserController
    ```
 
 5. **Re-Analyze**
-   - SonarLint automatically re-analyzes
+   - SonarQube for IDE automatically re-analyzes
    - Verify issues are resolved
 
 6. **Accept Changes**
@@ -228,18 +232,22 @@ Work on multiple features simultaneously across branches.
 ### Scenario: Parallel Feature Development
 
 1. **Branch A: Add Search Feature**
+
    ```bash
    git checkout -b feature/search
    claude "Implement search functionality"
    ```
+
    - Task created on "feature/search" branch
    - Work tracked separately
 
 2. **Switch to Branch B: Fix Bug**
+
    ```bash
    git checkout -b fix/authentication-bug
    claude "Fix session expiration bug"
    ```
+
    - New task created on "fix/authentication-bug" branch
 
 3. **View Tasks by Branch**
@@ -260,6 +268,7 @@ Work on multiple features simultaneously across branches.
    git checkout main
    git merge feature/search
    ```
+
    - Tasks remain associated with original branch
 
 ### Best Practices
@@ -304,21 +313,25 @@ Monitor and optimize Claude API costs.
 ### Optimization Strategies
 
 **Reduce Input Tokens**
+
 - Keep prompts concise
 - Avoid including unnecessary context
 - Use Claude's memory features
 
 **Use Cache Effectively**
+
 - Let Claude cache common patterns
 - Reuse conversations when possible
 - Don't restart sessions unnecessarily
 
 **Choose Right Model**
+
 - Use Haiku for simple tasks
 - Use Sonnet for standard tasks
 - Use Opus only for complex reasoning
 
 **Monitor Expensive Patterns**
+
 - Identify prompts with high costs
 - Refine prompting strategy
 - Break large tasks into smaller ones
@@ -326,6 +339,7 @@ Monitor and optimize Claude API costs.
 ### Budget Alerts
 
 Set up notifications:
+
 1. **Settings → Notifications**
 2. **Enable Budget Alerts**
 3. **Set Thresholds**
@@ -359,9 +373,11 @@ Link Kintsugi tasks to JIRA tickets for project management.
    - Note ticket key (e.g., "PROJ-123")
 
 2. **Start Work with Claude**
+
    ```bash
    claude "PROJ-123: Implement user profile page"
    ```
+
    - Include ticket key in prompt
    - Kintsugi auto-detects and links
 
@@ -424,7 +440,7 @@ Use Kintsugi in a team environment.
 5. **Reviewer Uses Kintsugi**
    - Reviewer clones branch
    - Views task in their Kintsugi
-   - Reviews diff and SonarLint issues
+   - Reviews diff and SonarQube for IDE issues
    - Checks token usage (cost efficiency)
 
 6. **Approval and Merge**
@@ -435,18 +451,21 @@ Use Kintsugi in a team environment.
 ### Team Best Practices
 
 **Standards**
+
 - **Naming Conventions** - Consistent epic and task names
 - **Branch Strategy** - Agreed git workflow
 - **Quality Rules** - Shared SonarQube profiles
 - **Documentation** - Use task comments
 
 **Communication**
+
 - **Daily Standups** - Reference Kintsugi task IDs
 - **Status Updates** - Update JIRA with Kintsugi progress
 - **Code Reviews** - Share diffs from Kintsugi
 - **Retrospectives** - Review token usage patterns
 
 **Shared Configuration**
+
 - **SonarQube URL** - Team server
 - **JIRA Instance** - Team instance
 - **Quality Profiles** - Synchronized
@@ -461,6 +480,7 @@ Add a new project to Kintsugi.
 1. **Clone Repository** (if not local)
    - Use Kintsugi's built-in clone feature
    - Or clone manually:
+
    ```bash
    cd ~/projects
    git clone https://github.com/company/new-project.git
@@ -479,10 +499,13 @@ Add a new project to Kintsugi.
 4. **First Task**
    - Open terminal
    - Navigate to project
+
    ```bash
    cd ~/projects/new-project
    ```
+
    - Start work:
+
    ```bash
    claude "Analyze the codebase structure"
    ```
@@ -523,6 +546,7 @@ Use Kintsugi to debug and fix issues systematically.
    - Production error
 
 2. **Create Investigation Task**
+
    ```bash
    claude "Investigate why user login is failing on mobile"
    ```
@@ -534,10 +558,11 @@ Use Kintsugi to debug and fix issues systematically.
 
 4. **Review Findings**
    - Check diff for files Claude examined
-   - Review SonarLint issues
+   - Review SonarQube for IDE issues
    - Check task comments
 
 5. **Create Fix Task**
+
    ```bash
    claude "Fix the mobile login bug by adjusting viewport handling"
    ```
@@ -548,7 +573,7 @@ Use Kintsugi to debug and fix issues systematically.
 
 7. **Verify Fix**
    - Review changes in diff
-   - Check SonarLint issues resolved
+   - Check SonarQube for IDE issues resolved
    - Test manually
 
 8. **Document**
