@@ -1,0 +1,96 @@
+site_name: Kintsugi Documentation
+site_description: Automated Development Environment for Claude Code
+site_author: Kintsugi Team
+site_url: https://sonarsource.github.io/kintsugi-docs
+
+repo_name: SonarSource/kintsugi-docs
+repo_url: https://github.com/SonarSource/kintsugi-docs
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  palette:
+    scheme: default
+    primary: indigo
+    accent: indigo
+  font:
+    text: Roboto
+    code: Roboto Mono
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+    - navigation.path
+    - navigation.indexes
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - search.share
+    - toc.follow
+    - content.code.copy
+    - content.action.edit
+    - content.action.view
+
+plugins:
+  - search:
+      lang: en
+      separator: '[\s\-,:!=\[\]()"/]+|(?!\b)(?=[A-Z][a-z])|\.(?!\d)|&[lg]t;'
+  - minify:
+      minify_html: true
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - tables
+  - attr_list
+  - md_in_html
+  - toc:
+      permalink: true
+      toc_depth: 3
+
+nav:
+  - Home: index.md
+  - Getting Started:
+    - Installation: getting-started.md
+    - Quick Reference: quick-reference.md
+  - Core Features:
+    - Features Overview: features.md
+    - Workflows: workflows.md
+    - Configuration: configuration.md
+  - Integrations:
+    - Setup Guide: integrations.md
+    - SonarQube: integrations.md#sonarqube-integration
+    - JIRA: integrations.md#jira-integration
+    - GitHub: integrations.md#github-integration
+  - Advanced:
+    - Architecture: architecture.md
+    - Data & Privacy: data-privacy.md
+  - Help:
+    - Troubleshooting: troubleshooting.md
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/SonarSource/kintsugi-docs
+  version:
+    provider: mike
+
+extra_css:
+  - stylesheets/extra.css
+
+copyright: Copyright &copy; 2024 Kintsugi Team
