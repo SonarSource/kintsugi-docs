@@ -1,0 +1,121 @@
+/* Custom styling for Kintsugi documentation */
+
+:root {
+  --md-primary-fg-color: #4f46e5;
+  --md-accent-fg-color: #818cf8;
+}
+
+/* Improve code block styling */
+.highlight pre {
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+/* Better admonition styling */
+.admonition {
+  border-radius: 0.5rem;
+  margin: 1.5rem 0;
+}
+
+/* Grid cards for feature showcase */
+.grid.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.grid.cards > div {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.grid.cards > div:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Button styling */
+.md-button {
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Table improvements */
+table {
+  font-size: 0.9rem;
+}
+
+table th {
+  background-color: rgba(79, 70, 229, 0.1);
+}
+
+/* Code inline styling */
+code {
+  background-color: rgba(79, 70, 229, 0.1);
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.25rem;
+  font-size: 0.85em;
+}
+
+/* Keyboard shortcuts */
+kbd {
+  background-color: #f3f4f6;
+  border: 1px solid #d1d5db;
+  border-radius: 0.25rem;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+  padding: 0.2rem 0.4rem;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.85em;
+}
+
+/* Navigation improvements */
+.md-nav__item--active > .md-nav__link {
+  font-weight: 600;
+}
+
+/* Better spacing for lists in content */
+.md-content ul li,
+.md-content ol li {
+  margin-bottom: 0.5rem;
+}
+
+/* Highlight important callouts */
+.admonition.important {
+  border-left: 4px solid #f59e0b;
+}
+
+.admonition.warning {
+  border-left: 4px solid #ef4444;
+}
+
+.admonition.tip {
+  border-left: 4px solid #10b981;
+}
+
+.admonition.note {
+  border-left: 4px solid #3b82f6;
+}
+
+/* Homepage hero section */
+.md-typeset h1:first-of-type {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.md-typeset h1:first-of-type + p {
+  font-size: 1.25rem;
+  color: #6b7280;
+  margin-bottom: 2rem;
+}
+
+/* Quick links styling */
+.md-typeset .grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
