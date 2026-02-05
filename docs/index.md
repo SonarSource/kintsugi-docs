@@ -1,170 +1,295 @@
-# Kintsugi
+# Command the Flux of AI-Generated Code
 
-**Automated Development Environment for Claude Code**
-
-Kintsugi is a comprehensive task management and code analysis platform that seamlessly integrates with Claude Code CLI. It automatically tracks your development workflows in real-time, providing visual task management, integrated terminal emulation, code quality analysis, and token usage tracking—all while capturing your Claude-assisted development sessions.
+<div class="hero-subtitle">
+An experimental Agentic Development Environment by Sonar
+</div>
 
 ---
 
 ## What is Kintsugi?
 
-Kintsugi transforms Claude Code from a CLI tool into a fully-featured development environment by providing:
+Kintsugi is an ongoing experiment that helps **Claude Code users build like power users** by providing a complete end-to-end workflow to manage and review AI-generated changes with total confidence.
 
-- **Automatic Task Tracking** - Tasks are created automatically as you work with Claude
-- **Visual Kanban Board** - Organize and track work across five workflow stages
-- **Integrated Terminal** - Execute Claude commands directly in the app
-- **Code Quality Analysis** - Real-time SonarLint analysis with SonarQube integration
-- **Token Usage Tracking** - Monitor API costs per task, epic, or entire sessions
-- **File Diff Viewer** - Review all changes before committing
-- **Tool Approval Workflow** - Control dangerous operations with approval modals
-- **Epic-Based Organization** - Group related tasks for large features
-- **JIRA Integration** - Link tasks to external project tracking
-- **Real-time Synchronization** - Multiple instances stay synchronized via WebSockets
+Unlike traditional IDEs that focus on writing code, Kintsugi is an **Agentic Development Environment (ADE)** built for orchestrating AI agents and reviewing their output—not replacing them.
+
+<div class="callout-experimental">
+<strong>⚡ Experimental Prototype</strong><br>
+This is a working experimental prototype with limited integrations. You may encounter bugs as we learn and iterate based on real user feedback.
+</div>
 
 ---
 
-## Quick Start
+## Why Kintsugi?
 
-### Prerequisites
+<div class="problem-solution">
 
-- **Node.js** 22+ and npm 10+
-- **Claude CLI** installed and configured
-- **Java** 17+ (for SonarLint code analysis)
-- **Git** for repository management
+### The Challenge
+**CLI agents are incredibly powerful.** Tools like Claude Code can generate entire features in seconds. But reviewing that generated code, maintaining quality and security at speed—that takes significant care.
 
-### Installation
-
-=== "macOS"
-
-    1. Download the `.dmg` installer
-    2. Drag Kintsugi to Applications folder
-    3. Launch from Applications
-
-=== "Windows"
-
-    1. Download the `.exe` installer
-    2. Run the installer
-    3. Launch from Start Menu
-
-=== "Linux"
-
-    ```bash
-    # AppImage
-    chmod +x Kintsugi-x.y.z.AppImage
-    ./Kintsugi-x.y.z.AppImage
-
-    # Debian/Ubuntu
-    sudo dpkg -i Kintsugi-x.y.z.deb
-    ```
-
-### First Steps
-
-1. **Open the Terminal** in Kintsugi
-2. **Navigate to your project** directory
-3. **Start Claude Code** with your first prompt
-4. **Watch your task appear** automatically on the Kanban board
-5. **Track your progress** as Claude works through your request
-
-[Get Started →](getting-started.md){ .md-button .md-button--primary }
-[View Features →](features.md){ .md-button }
-
----
-
-## Key Features at a Glance
-
-### Automatic Task Management
-Tasks are created automatically when you submit prompts to Claude Code. Each task captures:
-
-- The prompt text
-- Git branch and repository context
-- File changes and diffs
-- Token usage and costs
-- Complete audit trail
-
-### Integrated Development Environment
-- **Terminal Emulation** - Full-featured terminal built into the app
-- **Code Editor** - View files with syntax highlighting
-- **Diff Viewer** - Side-by-side comparison of changes
-- **File Browser** - Navigate your project structure
-
-### Code Quality Analysis
-- **SonarLint Integration** - Real-time code analysis as Claude makes changes
-- **SonarQube Connected Mode** - Sync quality profiles from your SonarQube instance
-- **Issue Detection** - Find bugs, vulnerabilities, and code smells
-- **Inline Annotations** - Issues displayed directly in the diff viewer
-
-### Token Usage Tracking
-- Automatic calculation of token consumption from Claude CLI transcripts
-- Per-model breakdowns (input/output, cache creation/read)
-- Cost tracking in USD
-- Reports by task, epic, or all work
-
-### Local-First Architecture
-All sensitive data stays on your machine:
-
-- SQLite database at `~/.kintsugi/local.db`
-- File snapshots in `~/.kintsugi/task-snapshots/`
-- No cloud storage required
-- Optional telemetry (can be disabled)
-
----
-
-## Technology Stack
-
-<div class="grid cards" markdown>
-
--   :material-electron-framework:{ .lg .middle } **Desktop App**
-
-    ---
-
-    Electron, React, TypeScript, TailwindCSS
-
--   :material-nodejs:{ .lg .middle } **Local Backend**
-
-    ---
-
-    Node.js, Express, SQLite, Socket.IO
-
--   :material-language-java:{ .lg .middle } **Code Analysis**
-
-    ---
-
-    Java, SonarLint RPC Client
-
--   :material-console:{ .lg .middle } **CLI Plugin**
-
-    ---
-
-    Node.js, TypeScript
-
--   :material-terminal:{ .lg .middle } **Terminal**
-
-    ---
-
-    xterm.js, node-pty
-
--   :material-webpack:{ .lg .middle } **Build Tools**
-
-    ---
-
-    Vite, electron-builder
+Power users build their own guardrails. **Kintsugi builds them for you.**
 
 </div>
 
 ---
 
-## Community & Support
+## Core Philosophy
 
-- **Issues**: [GitHub Issues](https://github.com/your-org/kintsugi/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/your-org/kintsugi/discussions)
-- **Documentation**: Full Documentation (you're here!)
+### CLI Power, GUI Clarity 🖥️ + 📱
+
+**You keep using the terminal you love.** Kintsugi adds visual superpowers.
+
+<div class="two-column-grid">
+
+**In Your Terminal:**
+- Run Claude Code as normal
+- Submit prompts naturally
+- Use your familiar shell
+
+**In Kintsugi App:**
+- See task cards appear automatically
+- Review diffs visually
+- Approve/deny dangerous operations
+- Track token costs
+- Manage parallel sessions
+
+</div>
+
+Kintsugi doesn't replace your terminal—it makes AI-generated code **visible, manageable, and safe**.
 
 ---
 
-## License
+## From Linear to Parallel
 
-MIT License - see [LICENSE](https://github.com/your-org/kintsugi/blob/main/LICENSE) for details
+### Multi-Threaded Development
 
-## Security
+Start multiple AI agents working on separate features simultaneously. Kintsugi prevents them from stepping on each other and shows you real-time progress on each task.
 
-For security concerns, please see [SECURITY.md](https://github.com/your-org/kintsugi/blob/main/SECURITY.md)
+**No more context switching.** See all your AI sessions in one visual queue.
+
+---
+
+## Sonar-Powered Guardrails
+
+Every line of AI-generated code is analyzed with **SonarLint integration**—the same technology powering SonarQube. Catch bugs, vulnerabilities, and code smells before they reach your codebase.
+
+<div class="feature-highlight">
+Built by the team at Sonar, Kintsugi infuses your agentic workflow with deep code analysis you can trust.
+</div>
+
+---
+
+## What You Can Do
+
+### Go from Idea to PR
+
+<div class="workflow-steps">
+
+**1. Terminal → Prompt**
+Run Claude Code in Kintsugi's integrated terminal, just like you always do.
+
+**2. App → Visual Tasks**
+Watch task cards appear automatically on your Kanban board as Claude works.
+
+**3. App → Review & Approve**
+Review diffs side-by-side, check SonarLint issues, approve file changes—all visually.
+
+**4. App → Track & Ship**
+See token costs, manage parallel sessions, push to PR when ready.
+
+</div>
+
+---
+
+## Requirements
+
+Before you start, make sure you have:
+
+### ✅ Required
+
+- **Active Claude Code subscription** - Kintsugi extends Claude Code, you need both
+- **macOS, Windows, or Linux** - Desktop app available for all platforms
+- **Git** - For repository management
+- **Node.js 22+** - For CLI hooks integration
+
+### 💡 Optional (but Recommended)
+
+- **Java 17+** - For SonarLint code analysis (highly recommended!)
+- **SonarQube** - Connect to your team's quality profiles (optional)
+- **JIRA** - Link tasks to tickets (optional)
+
+---
+
+## Get Started in 3 Steps
+
+### 1. Download Kintsugi
+
+=== "macOS"
+    Download the `.dmg` installer, drag to Applications, and launch.
+
+=== "Windows"
+    Download the `.exe` installer, run it, and launch from Start Menu.
+
+=== "Linux"
+    Download `.AppImage` or `.deb` package:
+    ```bash
+    chmod +x Kintsugi-x.y.z.AppImage
+    ./Kintsugi-x.y.z.AppImage
+    ```
+
+### 2. Complete Onboarding
+
+On first launch, Kintsugi will guide you through:
+
+- **Installing CLI hooks** - Connects Claude Code to Kintsugi
+- **Selecting your project** - Choose a Git repository to work with
+- **Optional integrations** - SonarQube, JIRA (can skip for now)
+
+The onboarding takes ~2 minutes.
+
+### 3. Run Your First AI Session
+
+1. Open the **terminal in Kintsugi** (or use your external terminal)
+2. Navigate to your project: `cd ~/projects/my-app`
+3. Run Claude Code: `claude "Add error handling to the API"`
+4. **Watch Kintsugi automatically:**
+   - Create a task card
+   - Track file changes
+   - Generate diffs
+   - Calculate token costs
+   - Move through workflow stages
+
+**That's it!** You're now using Kintsugi.
+
+[📖 Detailed Setup Guide →](getting-started.md){ .md-button .md-button--primary }
+
+---
+
+## Help Us Shape It
+
+<div class="callout-community">
+
+### Join the Experiment
+
+We're looking for Claude Code users to experiment with Kintsugi and help us understand your pain points, ideas, and opinions.
+
+**Your feedback shapes what Kintsugi becomes.**
+
+- Share what works and what doesn't
+- Request features that matter to you
+- Report bugs (expect some!)
+- Join discussions about the future of ADEs
+
+</div>
+
+---
+
+## What's Inside Kintsugi
+
+### Visual Task Management
+**Terminal:** Run Claude Code normally
+**App:** See task cards, drag-and-drop workflow, visual progress
+
+### Code Review Interface
+**Terminal:** Claude generates code
+**App:** Side-by-side diffs, syntax highlighting, easy navigation
+
+### Approval Workflow
+**Terminal:** Claude requests to write files
+**App:** Approve/deny with preview, modify before accepting
+
+### SonarLint Analysis
+**Terminal:** Code changes happen
+**App:** Instant quality feedback, inline issue markers
+
+### Token Cost Tracking
+**Terminal:** API calls to Claude
+**App:** Real-time cost breakdown per task/epic
+
+### Multi-Session Management
+**Terminal:** Run multiple Claude sessions
+**App:** Visual queue, parallel task tracking, no conflicts
+
+[🚀 Explore All Features →](features.md){ .md-button }
+
+---
+
+## The Kintsugi Workflow
+
+Unlike traditional IDEs where you write code, or pure CLI where you only see text streams, Kintsugi combines both worlds:
+
+```mermaid
+graph LR
+    A[You in Terminal] -->|Prompt| B[Claude Code]
+    B -->|Generates Code| C[Kintsugi App]
+    C -->|Visual Review| D{Approve?}
+    D -->|Yes| E[Commit & Ship]
+    D -->|No| A
+    C -->|SonarLint| F[Quality Check]
+    F --> D
+```
+
+**You stay in control.** AI generates, you review visually, Sonar guards quality.
+
+---
+
+## System Requirements
+
+| Component | Requirement |
+|-----------|-------------|
+| **OS** | macOS 11+, Windows 10+, Ubuntu 20.04+ |
+| **Claude Code** | Active subscription required |
+| **Node.js** | Version 22 or higher |
+| **Git** | Any recent version |
+| **Java** | 17+ (optional, for SonarLint) |
+| **RAM** | 4GB minimum, 8GB recommended |
+| **Disk Space** | 500MB for app + space for snapshots |
+
+---
+
+## What's Next?
+
+<div class="next-steps-grid">
+
+<div class="next-step-card">
+<h3>📥 Get Started</h3>
+<p>Install Kintsugi and complete your first AI session with visual feedback</p>
+<a href="getting-started.md">Setup Guide →</a>
+</div>
+
+<div class="next-step-card">
+<h3>🎯 Learn Features</h3>
+<p>Discover what you can do in Kintsugi vs the terminal</p>
+<a href="features.md">Features Overview →</a>
+</div>
+
+<div class="next-step-card">
+<h3>🔧 Configure</h3>
+<p>Connect SonarQube, customize settings, integrate JIRA</p>
+<a href="configuration.md">Configuration →</a>
+</div>
+
+<div class="next-step-card">
+<h3>💬 Get Help</h3>
+<p>Troubleshoot issues, join the community, share feedback</p>
+<a href="troubleshooting.md">Troubleshooting →</a>
+</div>
+
+</div>
+
+---
+
+<div class="footer-cta">
+
+## Ready to Build Like a Power User?
+
+Download Kintsugi and experience the future of agentic development.
+
+[Download Now](#){ .md-button .md-button--primary }
+[Read the Docs](getting-started.md){ .md-button }
+
+</div>
+
+---
+
+**Built with 🖤 by the Sonar team**
+Questions? Feedback? [GitHub Discussions](https://github.com/SonarSource/kintsugi-docs/discussions) | [Report Issues](https://github.com/SonarSource/kintsugi-docs/issues)
