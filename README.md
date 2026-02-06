@@ -20,7 +20,7 @@ Kintsugi is a comprehensive task management and code analysis platform that seam
 - **Automatic Task Tracking** - Tasks created as you work with Claude
 - **Visual Kanban Board** - Organize work across five workflow stages
 - **Integrated Terminal** - Execute Claude commands directly in the app
-- **Code Quality Analysis** - Real-time SonarLint with SonarQube integration
+- **Code Quality Analysis** - Real-time SonarQube for IDE with SonarQube integration
 - **Token Usage Tracking** - Monitor API costs per task or epic
 - **Local-First Architecture** - All data stays on your machine
 
@@ -34,17 +34,20 @@ Kintsugi is a comprehensive task management and code analysis platform that seam
 ### Setup
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/SonarSource/kintsugi-docs.git
    cd kintsugi-docs
    ```
 
 2. **Install dependencies**
+
    ```bash
    pip install -r requirements.txt
    ```
 
 3. **Run local server**
+
    ```bash
    mkdocs serve
    ```
@@ -89,6 +92,7 @@ kintsugi-docs/
 ### Making Changes
 
 1. **Create a branch**
+
    ```bash
    git checkout -b update-docs
    ```
@@ -99,11 +103,13 @@ kintsugi-docs/
    - Use MkDocs Material extensions for enhanced features
 
 3. **Preview changes**
+
    ```bash
    mkdocs serve
    ```
 
 4. **Commit and push**
+
    ```bash
    git add .
    git commit -m "Update documentation"
@@ -127,27 +133,30 @@ kintsugi-docs/
 MkDocs Material supports many extensions:
 
 **Admonitions** (callouts):
+
 ```markdown
 !!! note "Title"
-    Content here
+Content here
 
 !!! warning
-    Warning content
+Warning content
 
 !!! tip
-    Helpful tip
+Helpful tip
 ```
 
 **Tabs**:
+
 ```markdown
 === "Tab 1"
-    Content 1
+Content 1
 
 === "Tab 2"
-    Content 2
+Content 2
 ```
 
 **Code blocks**:
+
 ````markdown
 ```python
 def hello():
@@ -156,6 +165,7 @@ def hello():
 ````
 
 **Task lists**:
+
 ```markdown
 - [x] Completed task
 - [ ] Incomplete task
@@ -168,6 +178,7 @@ def hello():
 Documentation is automatically deployed to GitHub Pages when changes are pushed to the `main` or `master` branch.
 
 The GitHub Actions workflow (`.github/workflows/deploy-docs.yml`) handles:
+
 1. Installing Python and dependencies
 2. Building the documentation with MkDocs
 3. Deploying to GitHub Pages
@@ -185,6 +196,7 @@ This builds the documentation and pushes to the `gh-pages` branch.
 ### Site Settings
 
 Edit `mkdocs.yml` to configure:
+
 - Site name and description
 - Navigation structure
 - Theme settings
@@ -196,10 +208,6 @@ Edit `mkdocs.yml` to configure:
 - **Colors**: Edit `:root` variables in `docs/stylesheets/extra.css`
 - **Logo**: Add to `docs/images/logo.png` and reference in `mkdocs.yml`
 - **Favicon**: Add to `docs/images/favicon.ico` and reference in `mkdocs.yml`
-
-## 📄 License
-
-MIT License - see [LICENSE](LICENSE) for details
 
 ## 🆘 Need Help?
 

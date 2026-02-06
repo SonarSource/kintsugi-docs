@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{# Add custom meta tags for better SEO #}
+{% block extrahead %}
+  <meta name="author" content="Kintsugi Team - SonarSource">
+  <meta name="theme-color" content="#5e3ec6">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  
+  {# Preload critical fonts #}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  {# Add Inter font #}
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  {# Add JetBrains Mono font #}
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+{% endblock %}
+
+{# Custom footer with additional links #}
+{% block footer %}
+  {{ super() }}
+  <div style="text-align: center; padding: 2rem 1rem; background: var(--md-footer-bg-color); color: var(--md-footer-fg-color--light); font-size: 0.75rem; border-top: 1px solid var(--md-default-fg-color--lightest);">
+    Built with <span style="color: #e25555;">♥</span> by the Sonar team | Powered by <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" style="color: var(--md-primary-fg-color);">Material for MkDocs</a>
+  </div>
+{% endblock %}

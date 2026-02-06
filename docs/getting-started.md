@@ -24,7 +24,7 @@ Before installing Kintsugi, ensure you have the following:
 ### Optional but Recommended
 
 - **Java 17+**
-  - Required for SonarLint code analysis features
+  - Required for SonarQube for IDE code analysis features
   - Check version: `java --version`
   - Download from: [OpenJDK](https://openjdk.org/) or [Oracle JDK](https://www.oracle.com/java/technologies/downloads/)
 
@@ -75,11 +75,13 @@ Before installing Kintsugi, ensure you have the following:
 #### AppImage (Universal)
 
 1. **Download the AppImage**
+
    ```bash
    wget <release-url>/Kintsugi-x.y.z.AppImage
    ```
 
 2. **Make it executable**
+
    ```bash
    chmod +x Kintsugi-x.y.z.AppImage
    ```
@@ -109,10 +111,11 @@ When you launch Kintsugi for the first time, you'll go through a guided onboardi
 ### Step 1: Backend Initialization
 
 Kintsugi will automatically:
+
 - Start the local backend server on port 63421
 - Create configuration directory at `~/.kintsugi/`
 - Initialize SQLite database at `~/.kintsugi/local.db`
-- Start SonarLint Bridge on port 8765 (if Java is available)
+- Start SonarQube for IDE Bridge on port 8765 (if Java is available)
 
 You'll see a startup screen while these services initialize.
 
@@ -130,6 +133,7 @@ The plugin enables automatic task tracking by registering hooks with Claude Code
    - Configuration file is created at `~/.kintsugi/config.json`
 
 3. **Manual Installation** (if needed)
+
    ```bash
    npm install -g @kintsugi/plugin
    kintsugi register-hooks
@@ -196,6 +200,7 @@ claude "Add error handling to the API routes"
 ```
 
 Or use interactive mode:
+
 ```bash
 claude
 > Add error handling to the API routes
@@ -229,7 +234,7 @@ As soon as you submit the prompt:
 Once Claude finishes:
 
 1. **Click "View Diff"** to review changes
-2. **Check SonarLint Issues** (if enabled)
+2. **Check SonarQube for IDE Issues** (if enabled)
 3. **Add Comments** if needed
 4. **Drag to "Done"** when satisfied
 5. **Commit your changes** in the terminal
@@ -249,6 +254,7 @@ The board has 5 columns representing task workflow:
 ### Task Cards
 
 Each task card shows:
+
 - Prompt text
 - Git branch and repository
 - Status and timestamps
@@ -258,6 +264,7 @@ Each task card shows:
 ### Terminal Panel
 
 The integrated terminal:
+
 - Runs your system shell (bash/zsh/PowerShell)
 - Supports all standard terminal features
 - Commands are linked to active tasks
@@ -268,7 +275,7 @@ The integrated terminal:
 - **Terminal** - Command line interface
 - **Diff Viewer** - Side-by-side file comparison
 - **Code Editor** - File viewer with syntax highlighting
-- **SonarLint** - Code quality issues
+- **SonarQube for IDE** - Code quality issues
 
 ## Next Steps
 
@@ -285,7 +292,7 @@ If you encounter problems during setup, see the [Troubleshooting Guide](troubles
 
 - Backend fails to start
 - Hooks not registering
-- SonarLint Bridge not starting
+- SonarQube for IDE Bridge not starting
 - Permission errors
 - Port conflicts
 
@@ -293,15 +300,15 @@ If you encounter problems during setup, see the [Troubleshooting Guide](troubles
 
 After setup, you'll find these files in `~/.kintsugi/`:
 
-| File | Purpose |
-|------|---------|
-| `local.db` | SQLite database with all task data |
-| `config.json` | Backend URL and authentication token |
-| `desktop-config.json` | UI preferences and credentials |
-| `local-backend.log` | Backend server logs |
-| `hook-debug.log` | CLI plugin logs |
-| `local-backend.pid` | Backend process ID |
-| `task-snapshots/` | Before/after file snapshots |
+| File                  | Purpose                              |
+| --------------------- | ------------------------------------ |
+| `local.db`            | SQLite database with all task data   |
+| `config.json`         | Backend URL and authentication token |
+| `desktop-config.json` | UI preferences and credentials       |
+| `local-backend.log`   | Backend server logs                  |
+| `hook-debug.log`      | CLI plugin logs                      |
+| `local-backend.pid`   | Backend process ID                   |
+| `task-snapshots/`     | Before/after file snapshots          |
 
 ## Getting Help
 

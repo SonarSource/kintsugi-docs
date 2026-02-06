@@ -49,7 +49,7 @@ claude                              # Interactive mode
 ```bash
 curl http://localhost:63421/health   # Check backend
 lsof -i :63421                      # Backend running?
-lsof -i :8765                       # SonarLint running?
+lsof -i :8765                       # SonarQube for IDE running?
 ```
 
 ## File Locations
@@ -115,7 +115,7 @@ sqlite3 ~/.kintsugi/local.db "VACUUM"
 rm ~/.kintsugi/local.db
 ```
 
-### SonarLint Not Working
+### SonarQube for IDE Not Working
 
 ```bash
 java --version                    # Check Java 17+
@@ -169,6 +169,7 @@ Settings → Advanced → Backend Port: 63421
 Settings → Privacy → Telemetry: Off
 
 Or:
+
 ```bash
 export KINTSUGI_DISABLE_TELEMETRY=true
 ```
@@ -271,7 +272,7 @@ find ~/.kintsugi/task-snapshots/ -mtime +30 -delete
 
 1. **Limit Active Tasks** - Archive tasks older than 30 days
 2. **Reduce Scrollback** - Settings → Terminal → Scrollback: 1000
-3. **Disable Unused Features** - Turn off SonarLint if not needed
+3. **Disable Unused Features** - Turn off SonarQube for IDE if not needed
 4. **Regular Cleanup** - Vacuum database monthly
 5. **Filter Views** - Use filters to reduce rendered items
 
@@ -291,7 +292,7 @@ export KINTSUGI_PORT=63421
 export KINTSUGI_LOG_LEVEL=info
 export KINTSUGI_DISABLE_TELEMETRY=true
 
-# SonarLint
+# SonarQube for IDE
 export SONARLINT_BRIDGE_PORT=8765
 export SONARLINT_JAVA_PATH=/path/to/java
 

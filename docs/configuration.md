@@ -6,13 +6,13 @@ This guide covers all configuration options available in Kintsugi, from basic se
 
 Kintsugi uses several configuration files stored in `~/.kintsugi/`:
 
-| File | Purpose | Format |
-|------|---------|--------|
-| `config.json` | Backend connection and auth | JSON |
-| `desktop-config.json` | UI preferences and credentials | JSON |
-| `local.db` | SQLite database | Binary |
-| `local-backend.log` | Backend server logs | Text |
-| `hook-debug.log` | CLI plugin logs | Text |
+| File                  | Purpose                        | Format |
+| --------------------- | ------------------------------ | ------ |
+| `config.json`         | Backend connection and auth    | JSON   |
+| `desktop-config.json` | UI preferences and credentials | JSON   |
+| `local.db`            | SQLite database                | Binary |
+| `local-backend.log`   | Backend server logs            | Text   |
+| `hook-debug.log`      | CLI plugin logs                | Text   |
 
 Additionally, Claude hooks are registered in `~/.claude/settings.json`.
 
@@ -23,29 +23,33 @@ Access settings through: Settings button (gear icon) or `Ctrl/Cmd + ,`
 ### General Settings
 
 **Appearance**
+
 - **Theme**: Light, Dark, or System (follows OS theme)
 - **Color Scheme**: Primary accent color
 - **Font Size**: UI font size (Small, Medium, Large)
 - **Compact Mode**: Reduce spacing for more content
 
 **Behavior**
+
 - **Start on Login**: Launch Kintsugi when you log in
 - **Minimize to Tray**: Keep running in system tray when closed
 - **Confirm Before Quit**: Show confirmation dialog
 - **Auto-Update**: Automatically check for updates
 
 **Notifications**
+
 - **Desktop Notifications**: Enable system notifications
 - **Sound**: Play sound for notifications
 - **Notification Types**:
   - Task status changes
   - Approval requests
-  - SonarLint issues found
+  - SonarQube for IDE issues found
   - Token budget alerts
 
 ### Terminal Settings
 
 **Shell Configuration**
+
 - **Default Shell**: Choose from detected shells
   - bash
   - zsh
@@ -56,6 +60,7 @@ Access settings through: Settings button (gear icon) or `Ctrl/Cmd + ,`
 - **Shell Arguments**: Additional arguments to pass
 
 **Appearance**
+
 - **Font Family**: Monospace font for terminal
   - Cascadia Code
   - Fira Code
@@ -70,6 +75,7 @@ Access settings through: Settings button (gear icon) or `Ctrl/Cmd + ,`
 - **Cursor Blink**: Enable cursor blinking
 
 **Behavior**
+
 - **Scrollback Lines**: History buffer size (1000-100000)
 - **Scroll Sensitivity**: Mouse wheel scroll speed
 - **Copy on Select**: Auto-copy selection to clipboard
@@ -77,6 +83,7 @@ Access settings through: Settings button (gear icon) or `Ctrl/Cmd + ,`
 - **Confirm Before Clear**: Prompt when clearing terminal
 
 **Theme**
+
 - **Terminal Theme**: Independent from app theme
   - Light
   - Dark
@@ -85,16 +92,19 @@ Access settings through: Settings button (gear icon) or `Ctrl/Cmd + ,`
 ### Task Management
 
 **Auto-Creation**
+
 - **Create on Prompt**: Auto-create task on prompt submit (recommended)
 - **Require Confirmation**: Show modal before creating
 - **Default Status**: Initial status for new tasks
 
 **Status Transitions**
+
 - **Auto-Progress**: Automatically move to "In Progress" on first edit
 - **Auto-Review**: Move to "Ready for Review" on session end
 - **Auto-Complete**: Never auto-complete (always manual)
 
 **Display**
+
 - **Card Density**: Compact, Normal, or Expanded
 - **Show Token Cost**: Display cost badge on cards
 - **Show Timestamps**: Show relative time on cards
@@ -102,14 +112,16 @@ Access settings through: Settings button (gear icon) or `Ctrl/Cmd + ,`
 - **Group by Epic**: Show epics as groups
 
 **Filters**
+
 - **Default View**: All tasks or filtered view
 - **Persist Filters**: Remember filter selections
 - **Quick Filters**: Customize quick filter buttons
 
 ### Code Analysis
 
-**SonarLint**
-- **Enable Analysis**: Turn on/off SonarLint integration
+**SonarQube for IDE**
+
+- **Enable Analysis**: Turn on/off SonarQube for IDE integration
 - **Auto-Analyze**: Analyze on every file change
 - **Severity Threshold**: Minimum severity to display
   - All
@@ -123,6 +135,7 @@ Access settings through: Settings button (gear icon) or `Ctrl/Cmd + ,`
 
 **Languages**
 Select which languages to analyze:
+
 - Java, JavaScript, TypeScript
 - Python, C#, C, C++
 - PHP, Kotlin, Ruby, Scala
@@ -131,6 +144,7 @@ Select which languages to analyze:
 - All others (25+ total)
 
 **Performance**
+
 - **Analysis Timeout**: Max time for analysis (30-300s)
 - **Max File Size**: Skip files larger than threshold (1-10MB)
 - **Parallel Analysis**: Analyze multiple files concurrently
@@ -138,6 +152,7 @@ Select which languages to analyze:
 ### Diff Viewer
 
 **Display**
+
 - **View Mode**: Side-by-side or Unified
 - **Syntax Highlighting**: Enable code coloring
 - **Line Numbers**: Show line numbers
@@ -145,6 +160,7 @@ Select which languages to analyze:
 - **Context Lines**: Lines of context (0-10)
 
 **Navigation**
+
 - **Wrap Lines**: Word wrap long lines
 - **Scroll Sync**: Sync scrolling between sides
 - **Jump to Change**: Keyboard shortcut to next change
@@ -152,15 +168,18 @@ Select which languages to analyze:
 ### Keyboard Shortcuts
 
 **View Shortcuts**
+
 - List all keyboard shortcuts
 - Organized by category
 
 **Customize**
+
 - Click on shortcut to rebind
 - Press new key combination
 - Save or cancel
 
 **Categories**
+
 - Global
 - Terminal
 - Task Management
@@ -168,6 +187,7 @@ Select which languages to analyze:
 - Code Editor
 
 **Reset**
+
 - Reset individual shortcut
 - Reset category
 - Reset all to defaults
@@ -175,12 +195,14 @@ Select which languages to analyze:
 ### Advanced Settings
 
 **Backend**
+
 - **Backend URL**: Local backend address (default: `http://localhost:63421`)
 - **Auto-Start**: Start backend with app
 - **Port**: Backend server port (default: 63421)
 - **Log Level**: Error, Warn, Info, Debug
 
-**SonarLint Bridge**
+**SonarQube for IDE Bridge**
+
 - **Auto-Start**: Start bridge with app
 - **Port**: Bridge server port (default: 8765)
 - **Java Path**: Path to Java executable (auto-detected)
@@ -188,17 +210,20 @@ Select which languages to analyze:
 - **Analyzer Cache**: Cache directory for analyzers
 
 **Database**
+
 - **Database Path**: SQLite database location
 - **Backup Frequency**: Automatic backup interval
 - **Backup Location**: Where to store backups
 - **Max Backups**: Number of backups to keep
 
 **Privacy**
+
 - **Telemetry**: Enable/disable telemetry
 - **Error Reporting**: Send crash reports (Sentry)
 - **Device ID**: Unique anonymous identifier
 
 **Developer**
+
 - **Debug Mode**: Enable debug logging
 - **Dev Tools**: Open Chrome DevTools
 - **Reload**: Reload application
@@ -209,6 +234,7 @@ Select which languages to analyze:
 ### SonarQube Setup
 
 **Connection**
+
 1. **Open Settings → SonarQube**
 2. **Enter Server URL**
    - Example: `https://sonarqube.company.com`
@@ -220,6 +246,7 @@ Select which languages to analyze:
 5. **Save**
 
 **Project Binding**
+
 1. **Select Repository**
 2. **Click "Bind to SonarQube Project"**
 3. **Choose Organization** (if using SonarCloud)
@@ -230,6 +257,7 @@ Select which languages to analyze:
 6. **Save Binding**
 
 **Quality Profile Sync**
+
 - **Auto-Sync**: Sync on app startup
 - **Sync Frequency**: Manual or scheduled
 - **Last Sync**: Shows last sync time
@@ -238,6 +266,7 @@ Select which languages to analyze:
 ### JIRA Configuration
 
 **Credentials**
+
 1. **Open Settings → JIRA**
 2. **Enter JIRA URL**
    - Example: `https://yourcompany.atlassian.net`
@@ -253,10 +282,12 @@ Select which languages to analyze:
 7. **Save**
 
 **Project Mapping**
+
 - **Default Project**: Auto-link to this project
 - **Custom Mappings**: Map repos to JIRA projects
 
 **Sync Settings**
+
 - **Auto-Fetch**: Fetch ticket data automatically
 - **Cache Duration**: How long to cache ticket data (5-60 min)
 - **Fetch Comments**: Include ticket comments
@@ -264,6 +295,7 @@ Select which languages to analyze:
 ### GitHub Configuration
 
 **Authentication**
+
 1. **Open Settings → GitHub**
 2. **Generate Personal Access Token**
    - Go to GitHub → Settings → Developer settings → Personal access tokens
@@ -276,10 +308,12 @@ Select which languages to analyze:
 5. **Save**
 
 **Repository Mapping**
+
 - **Auto-Detect**: Use git remote URL
 - **Manual Override**: Specify owner/repo
 
 **Pull Request Settings**
+
 - **Auto-Detect**: Detect PR references in prompts
 - **PR Actions**: What to do when PR detected
   - Create card
@@ -331,6 +365,7 @@ kintsugi register-hooks
 ```
 
 Or manually:
+
 ```bash
 kintsugi register-hooks --claude-settings ~/.claude/settings.json
 ```
@@ -356,7 +391,7 @@ KINTSUGI_DB_PATH=~/.kintsugi/local.db
 KINTSUGI_DISABLE_TELEMETRY=true
 ```
 
-### SonarLint Bridge Variables
+### SonarQube for IDE Bridge Variables
 
 ```bash
 SONARLINT_BRIDGE_PORT=8765
@@ -381,6 +416,7 @@ Customize which operations require approval.
 **Settings → Approvals → Tool Rules**
 
 For each tool, configure:
+
 - **Require Approval**: Yes/No
 - **Timeout**: How long to wait (seconds)
 - **Auto-Allow Patterns**: Paths/patterns that bypass approval
@@ -389,6 +425,7 @@ For each tool, configure:
 ### Example Configuration
 
 **Write Tool**
+
 - Require Approval: Yes
 - Timeout: 120s
 - Auto-Allow:
@@ -401,6 +438,7 @@ For each tool, configure:
   - `*.key`
 
 **Bash Tool**
+
 - Require Approval: Yes
 - Timeout: 60s
 - Auto-Allow:
@@ -417,11 +455,13 @@ For each tool, configure:
 Configure automatic risk scoring:
 
 **File Patterns**
+
 - **High Risk**: Production configs, credentials, scripts
 - **Medium Risk**: Source code, package manifests
 - **Low Risk**: Tests, docs, assets
 
 **Commands**
+
 - **High Risk**: Destructive operations, system changes
 - **Medium Risk**: Build commands, git operations
 - **Low Risk**: Read-only commands, status checks
@@ -451,6 +491,7 @@ Configure automatic risk scoring:
 ### Team Configuration Templates
 
 Create templates for team:
+
 1. **Configure ideal settings**
 2. **Export configuration**
 3. **Share file with team**
@@ -462,10 +503,12 @@ Create templates for team:
 ### Reset to Defaults
 
 **Individual Settings**
+
 - Click "Reset" next to setting
 - Confirms before resetting
 
 **All Settings**
+
 - Settings → Advanced → Reset All
 - Backup prompt shown
 - Restarts application
@@ -473,6 +516,7 @@ Create templates for team:
 ### Configuration Validation
 
 **Settings → Advanced → Validate**
+
 - Checks all configuration files
 - Verifies backend connectivity
 - Tests integration credentials
@@ -490,16 +534,19 @@ tail -f ~/.kintsugi/hook-debug.log
 ### Common Issues
 
 **Hooks Not Working**
+
 - Verify `~/.claude/settings.json` has hook entries
 - Check hook script permissions: `chmod +x hooks/*.js`
 - Re-register: `kintsugi register-hooks`
 
 **Backend Won't Start**
+
 - Check port not in use: `lsof -i :63421`
 - Verify Node.js version: `node --version` (need 22+)
 - Check logs: `~/.kintsugi/local-backend.log`
 
-**SonarLint Not Analyzing**
+**SonarQube for IDE Not Analyzing**
+
 - Verify Java installed: `java --version` (need 17+)
 - Check bridge running: `lsof -i :8765`
 - Review bridge logs in app

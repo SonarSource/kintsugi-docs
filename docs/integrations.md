@@ -49,7 +49,7 @@ Connect Kintsugi to your SonarQube server for team-wide code quality standards.
 
 3. **Test Connection**
    - Click "Test Connection" button
-   - Should show: ✅ Connection successful
+   - Should show: Connection successful
 
 4. **Save Configuration**
 
@@ -80,11 +80,13 @@ Quality profiles define which rules to apply.
 #### Using Server Quality Profiles
 
 **Advantages:**
+
 - Consistency with CI/CD
 - Team-wide standards
 - Centrally managed
 
 **Setup:**
+
 1. Configure profiles in SonarQube UI
 2. Assign to project
 3. Sync in Kintsugi
@@ -92,10 +94,12 @@ Quality profiles define which rules to apply.
 #### Synchronization
 
 **Automatic Sync:**
+
 - On Kintsugi startup
 - Configurable frequency
 
 **Manual Sync:**
+
 - Settings → SonarQube → Sync Now
 - Recommended after profile changes
 
@@ -103,7 +107,8 @@ Quality profiles define which rules to apply.
 
 #### Supported Languages
 
-SonarLint analyzes 25+ languages:
+SonarQube for IDE analyzes 25+ languages:
+
 - **Java, JavaScript, TypeScript**
 - **Python, C#, C, C++**
 - **PHP, Kotlin, Ruby, Scala**
@@ -114,6 +119,7 @@ SonarLint analyzes 25+ languages:
 #### Language Detection
 
 Automatic based on file extension:
+
 - `.js` → JavaScript
 - `.ts` → TypeScript
 - `.py` → Python
@@ -123,10 +129,12 @@ Automatic based on file extension:
 #### Analysis Triggers
 
 **Automatic:**
+
 - When Claude edits files
 - On manual "Analyze" click
 
 **Configuration:**
+
 - Enable/disable in Settings → Code Analysis
 - Set file size limits
 - Configure timeouts
@@ -143,9 +151,10 @@ Automatic based on file extension:
 #### Issue Details
 
 Each issue shows:
+
 - **Type**: Bug, Vulnerability, Code Smell, Security Hotspot
 - **Severity**: Blocker, Critical, Major, Minor, Info
-- **Rule**: SonarLint rule key (e.g., `java:S1234`)
+- **Rule**: SonarQube for IDE rule key (e.g., `java:S1234`)
 - **Message**: Description of the issue
 - **Location**: Line and column numbers
 - **Effort**: Estimated time to fix
@@ -164,12 +173,14 @@ Each issue shows:
 #### Connection Issues
 
 **Cannot connect to server**
+
 - Verify server URL is correct
 - Check network connectivity: `curl https://sonarqube.yourcompany.com`
 - Verify firewall allows connection
 - Test with browser first
 
 **Authentication fails**
+
 - Verify token is valid
 - Check token hasn't expired
 - Ensure token has required permissions
@@ -178,12 +189,14 @@ Each issue shows:
 #### Project Binding Issues
 
 **No projects in dropdown**
+
 - Verify you have access to projects in SonarQube
 - Check organization is correct (SonarCloud)
 - Refresh projects list
 - Verify token permissions
 
 **Sync fails**
+
 - Check internet connection
 - Verify quality profile exists
 - Check SonarQube server is responsive
@@ -192,12 +205,14 @@ Each issue shows:
 #### Analysis Issues
 
 **Files not analyzed**
+
 - Check language is supported
 - Verify file size within limits (default 10MB)
-- Check SonarLint Bridge is running
+- Check SonarQube for IDE Bridge is running
 - Review bridge logs
 
 **Wrong rules applied**
+
 - Re-sync quality profile
 - Verify correct profile selected
 - Check binding is saved
@@ -269,6 +284,7 @@ Kintsugi auto-detects and links the ticket.
 #### Automatic Detection
 
 Keywords recognized in prompts:
+
 - `PROJ-123`
 - `Fix PROJ-123`
 - `Resolve PROJ-123`
@@ -285,6 +301,7 @@ Keywords recognized in prompts:
 #### In Task Details
 
 Full ticket information:
+
 - **Summary**: Ticket title
 - **Status**: Current JIRA status
 - **Assignee**: Who's responsible
@@ -314,11 +331,13 @@ Now tickets from that project auto-link when working in that repo.
 ### Sync Behavior
 
 **One-Way Sync:**
+
 - Kintsugi reads from JIRA
 - JIRA is never modified by Kintsugi
 - Manual updates in JIRA required
 
 **What Syncs:**
+
 - Ticket metadata
 - Status changes
 - Assignee changes
@@ -326,6 +345,7 @@ Now tickets from that project auto-link when working in that repo.
 - Comments (if enabled)
 
 **What Doesn't Sync:**
+
 - Task status → JIRA status
 - Task completion → JIRA resolution
 - Task comments → JIRA comments
@@ -335,12 +355,14 @@ Now tickets from that project auto-link when working in that repo.
 #### Connection Issues
 
 **Cannot connect**
+
 - Verify JIRA URL is correct
 - Check network connectivity
 - Test URL in browser
 - Verify no VPN required
 
 **Authentication fails**
+
 - Check email is correct
 - Verify API token is valid
 - Try regenerating token
@@ -349,12 +371,14 @@ Now tickets from that project auto-link when working in that repo.
 #### Ticket Issues
 
 **Ticket not found**
+
 - Verify ticket key is correct
 - Check you have permission to view
 - Ensure ticket isn't deleted
 - Try accessing in JIRA first
 
 **Data not updating**
+
 - Click refresh icon
 - Check cache timeout setting
 - Clear cache in settings
@@ -398,12 +422,14 @@ Integrate GitHub for pull request management and repository operations.
 Kintsugi auto-detects GitHub repositories:
 
 **From Git Remote:**
+
 ```bash
 git remote -v
 # origin  https://github.com/user/repo.git (fetch)
 ```
 
 **Supported URL Formats:**
+
 - `https://github.com/user/repo.git`
 - `git@github.com:user/repo.git`
 - `https://github.com/user/repo`
@@ -426,12 +452,14 @@ git remote -v
 #### Token Issues
 
 **Token invalid**
+
 - Verify token is correct
 - Check token hasn't expired
 - Ensure required scopes selected
 - Regenerate if needed
 
 **Permission denied**
+
 - Check repository access
 - Verify org membership
 - Ensure token has `repo` scope
@@ -439,6 +467,7 @@ git remote -v
 #### Repository Issues
 
 **Repository not detected**
+
 - Verify git remote is configured
 - Check URL format is supported
 - Ensure .git directory exists
@@ -465,6 +494,7 @@ kintsugi register-hooks
 ```
 
 Or with custom path:
+
 ```bash
 kintsugi register-hooks --claude-settings ~/.claude/settings.json
 ```
@@ -495,6 +525,7 @@ Check `~/.claude/settings.json`:
 **Trigger:** When you submit a prompt to Claude
 
 **Actions:**
+
 - Captures prompt text
 - Gets git context (repo, branch)
 - Creates task in Kintsugi
@@ -505,6 +536,7 @@ Check `~/.claude/settings.json`:
 **Trigger:** Before Claude executes a tool (Edit, Write, Bash, etc.)
 
 **Actions:**
+
 - Captures original file content
 - Saves snapshot to `~/.kintsugi/task-snapshots/`
 - Logs tool parameters
@@ -514,15 +546,17 @@ Check `~/.claude/settings.json`:
 **Trigger:** After Claude executes a tool
 
 **Actions:**
+
 - Records tool completion
 - Updates task status to "in_progress"
-- Triggers SonarLint analysis (if enabled)
+- Triggers SonarQube for IDE analysis (if enabled)
 
 #### Stop
 
 **Trigger:** When Claude stops and waits for input
 
 **Actions:**
+
 - Generates diff from snapshots
 - Stores diff in task
 - Updates status to "awaiting_input"
@@ -532,6 +566,7 @@ Check `~/.claude/settings.json`:
 **Trigger:** When Claude CLI session starts
 
 **Actions:**
+
 - Creates session record
 - Associates with repository
 
@@ -540,6 +575,7 @@ Check `~/.claude/settings.json`:
 **Trigger:** When Claude CLI session ends
 
 **Actions:**
+
 - Updates session end time
 - Moves tasks to "ready_for_review"
 - Calculates total consumption
@@ -549,6 +585,7 @@ Check `~/.claude/settings.json`:
 **Trigger:** When Claude sends status messages
 
 **Actions:**
+
 - Logs notification
 - Updates UI with status
 
@@ -557,6 +594,7 @@ Check `~/.claude/settings.json`:
 **Trigger:** When Claude needs permission for an operation
 
 **Actions:**
+
 - Creates approval request
 - Shows modal in Kintsugi
 - Polls for user decision
@@ -567,17 +605,20 @@ Check `~/.claude/settings.json`:
 #### Hooks Not Firing
 
 **Check registration:**
+
 ```bash
 cat ~/.claude/settings.json | grep hooks
 ```
 
 **Re-register:**
+
 ```bash
 kintsugi unregister-hooks
 kintsugi register-hooks
 ```
 
 **Check permissions:**
+
 ```bash
 ls -la ~/.kintsugi/
 chmod +x /path/to/kintsugi/hooks/*.js
@@ -586,17 +627,20 @@ chmod +x /path/to/kintsugi/hooks/*.js
 #### Tasks Not Created
 
 **Check backend:**
+
 ```bash
 curl http://localhost:63421/health
 ```
 
 **Check logs:**
+
 ```bash
 tail -f ~/.kintsugi/hook-debug.log
 tail -f ~/.kintsugi/local-backend.log
 ```
 
 **Verify plugin:**
+
 ```bash
 kintsugi --version
 ```
@@ -604,16 +648,19 @@ kintsugi --version
 #### Diffs Not Generated
 
 **Check snapshots:**
+
 ```bash
 ls -la ~/.kintsugi/task-snapshots/tasks/
 ```
 
 **Test diff generation:**
+
 ```bash
 kintsugi generate-diff --task-id <task-id>
 ```
 
 **Check Stop hook:**
+
 ```bash
 grep "on-stop" ~/.claude/settings.json
 ```
@@ -649,17 +696,20 @@ For team environments:
 ### Security
 
 **Token Management:**
+
 - Use tokens with minimal scopes
 - Rotate tokens regularly
 - Don't share tokens
 - Use separate tokens per tool
 
 **Credential Storage:**
+
 - Stored locally in `~/.kintsugi/desktop-config.json`
 - Never committed to git
 - Encrypted at rest (OS keychain integration planned)
 
 **Network Security:**
+
 - Use HTTPS for all connections
 - Verify SSL certificates
 - Use VPN if required

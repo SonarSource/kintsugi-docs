@@ -29,13 +29,13 @@ Each task automatically records:
 
 Tasks flow through five states:
 
-| Status | Description | Trigger |
-|--------|-------------|---------|
-| **To Do** | Task created but not started | Prompt submitted |
-| **In Progress** | Claude is actively working | First tool use (Edit/Write) |
-| **Awaiting Input** | Waiting for your response | Claude stops/pauses |
-| **Ready for Review** | Changes complete | Session ends |
-| **Done** | Reviewed and accepted | Manual drag to Done |
+| Status               | Description                  | Trigger                     |
+| -------------------- | ---------------------------- | --------------------------- |
+| **To Do**            | Task created but not started | Prompt submitted            |
+| **In Progress**      | Claude is actively working   | First tool use (Edit/Write) |
+| **Awaiting Input**   | Waiting for your response    | Claude stops/pauses         |
+| **Ready for Review** | Changes complete             | Session ends                |
+| **Done**             | Reviewed and accepted        | Manual drag to Done         |
 
 ### Manual Task Operations
 
@@ -63,6 +63,7 @@ Visual task organization with drag-and-drop functionality.
 ### Task Card Details
 
 Each card displays:
+
 - Prompt text (truncated with "show more")
 - Branch and repository info
 - Time indicators (created, last updated)
@@ -107,6 +108,7 @@ Full-featured terminal emulation built directly into Kintsugi.
 ### Terminal Settings
 
 Customize in Settings → Terminal:
+
 - **Shell** - Choose default shell (bash, zsh, fish, etc.)
 - **Font** - Customize font family and size
 - **Theme** - Light or dark terminal theme
@@ -125,7 +127,7 @@ Review all changes Claude makes before committing to your repository.
 - **Line Numbers** - Easy reference for both versions
 - **Context Lines** - See surrounding code
 - **File Navigation** - Jump between changed files
-- **SonarLint Integration** - Issues shown inline
+- **SonarQube for IDE Integration** - Issues shown inline
 
 ### Viewing Diffs
 
@@ -133,7 +135,7 @@ Review all changes Claude makes before committing to your repository.
 2. **Diff Panel Opens** in bottom panel
 3. **Select File** from changed files list
 4. **Review Changes** line by line
-5. **Check Issues** if SonarLint is enabled
+5. **Check Issues** if SonarQube for IDE is enabled
 
 ### Diff Actions
 
@@ -145,6 +147,7 @@ Review all changes Claude makes before committing to your repository.
 ### Diff Generation
 
 Diffs are generated automatically:
+
 - **Before Snapshot** - Captured when Claude starts editing
 - **After Snapshot** - Current file state when Claude stops
 - **Diff Algorithm** - Uses git diff for accuracy
@@ -152,9 +155,9 @@ Diffs are generated automatically:
 
 ## Code Quality Analysis
 
-Real-time code analysis powered by SonarLint and SonarQube.
+Real-time code analysis powered by SonarQube for IDE and SonarQube.
 
-### SonarLint Features
+### SonarQube for IDE Features
 
 - **Real-Time Analysis** - Analyze files as Claude edits them
 - **Language Support** - 25+ programming languages
@@ -174,6 +177,7 @@ Real-time code analysis powered by SonarLint and SonarQube.
 ### SonarQube Connected Mode
 
 Connect to your team's SonarQube server for:
+
 - **Quality Profiles** - Use team-defined rules
 - **Quality Gates** - Check against thresholds
 - **Issue Sync** - Maintain consistency with server
@@ -182,9 +186,10 @@ Connect to your team's SonarQube server for:
 ### Issue Details
 
 Each issue shows:
+
 - **Type** - Bug, Vulnerability, Code Smell, Security Hotspot
 - **Severity** - Blocker, Critical, Major, Minor, Info
-- **Rule Key** - SonarLint rule identifier
+- **Rule Key** - SonarQube for IDE rule identifier
 - **Message** - Description of the issue
 - **Location** - File, line, and column
 - **Effort** - Estimated time to fix
@@ -218,6 +223,7 @@ View token usage at three levels:
 ### Data Source
 
 Token data is extracted from:
+
 - Claude CLI transcript logs (`~/.claude/logs/`)
 - Parsed automatically every 30 seconds
 - Calculations use latest Anthropic API pricing
@@ -226,6 +232,7 @@ Token data is extracted from:
 ### Usage Display
 
 Token information shown:
+
 - **Task Cards** - Badge with total cost
 - **Task Details** - Full breakdown modal
 - **Reports** - Consumption report view
@@ -234,6 +241,7 @@ Token information shown:
 ### Cost Optimization
 
 Use consumption data to:
+
 - Identify expensive prompts
 - Optimize prompt engineering
 - Track budget utilization
@@ -246,6 +254,7 @@ Group related tasks into epics for large features or initiatives.
 ### What are Epics?
 
 Epics are containers for related tasks:
+
 - **High-Level Goals** - "Add user authentication", "Refactor API"
 - **Multiple Tasks** - Can contain unlimited child tasks
 - **Status Aggregation** - Epic status derived from tasks
@@ -263,6 +272,7 @@ Epics are containers for related tasks:
 ### Epic Status
 
 Epic status is automatically derived:
+
 - **Planning** - All tasks in "To Do"
 - **In Progress** - Some tasks in progress
 - **Review** - All tasks complete, awaiting review
@@ -271,6 +281,7 @@ Epic status is automatically derived:
 ### AI-Powered Summaries
 
 Generate epic summaries automatically:
+
 - **Click "Generate Summary"** on epic card
 - **AI Analyzes** all task prompts and changes
 - **Summary Generated** with key accomplishments
@@ -279,6 +290,7 @@ Generate epic summaries automatically:
 ### Epic Display
 
 Epics appear on the board as:
+
 - **Expanded Cards** - Show all child tasks
 - **Collapsed Cards** - Summary only
 - **Progress Indicator** - Visual progress bar
@@ -291,6 +303,7 @@ Control dangerous operations before Claude executes them.
 ### What Gets Approval Requests?
 
 By default, approval requested for:
+
 - **File Writes** - Creating or overwriting files
 - **Bash Commands** - Executing shell commands
 - **File Deletions** - Removing files
@@ -308,6 +321,7 @@ By default, approval requested for:
 ### Approval Modal
 
 Shows detailed information:
+
 - **Tool Name** - Edit, Write, Bash, etc.
 - **Parameters** - Arguments passed to tool
 - **Context** - Current task and session
@@ -325,6 +339,7 @@ Shows detailed information:
 ### Configuration
 
 Customize approval behavior in Settings:
+
 - **Enable/Disable** - Toggle approval system
 - **Tool Selection** - Choose which tools require approval
 - **Timeout Duration** - Adjust wait time
@@ -353,6 +368,7 @@ Link tasks to JIRA for external project management.
 ### JIRA Ticket Display
 
 Linked tickets show:
+
 - **Ticket Key** - Clickable link to JIRA
 - **Status** - Current JIRA status
 - **Assignee** - Who's responsible
@@ -373,11 +389,12 @@ Multiple Kintsugi instances stay synchronized via WebSockets.
 ### WebSocket Events
 
 Real-time updates for:
+
 - **Task Created** - New tasks appear instantly
 - **Task Updated** - Status changes propagate
 - **Epic Modified** - Epic changes reflected
 - **Approval Created** - Approval requests broadcast
-- **Analysis Complete** - SonarLint results shared
+- **Analysis Complete** - SonarQube for IDE results shared
 - **Comment Added** - Comments appear immediately
 
 ### Connection Management
@@ -390,6 +407,7 @@ Real-time updates for:
 ### Multi-Instance Support
 
 Run Kintsugi on multiple machines:
+
 - **Shared Database** - If using shared `~/.kintsugi/` directory
 - **Independent Databases** - Each machine has own data
 - **Sync via Git** - Commit database to share (not recommended)
@@ -401,6 +419,7 @@ Track Claude CLI sessions and associate with tasks.
 ### Session Information
 
 Each session captures:
+
 - **Session ID** - Claude CLI session identifier
 - **Start/End Time** - Duration of session
 - **Repository** - Git repository context
@@ -478,6 +497,7 @@ Efficient navigation with keyboard shortcuts.
 ### Customization
 
 Customize shortcuts in Settings → Keyboard:
+
 - **View All Shortcuts** - Complete list
 - **Rebind Keys** - Change default bindings
 - **Reset to Defaults** - Restore original shortcuts
@@ -500,7 +520,7 @@ Find tasks quickly with powerful search and filtering.
 - **Repository** - Filter by repository
 - **Epic** - Show tasks in specific epic
 - **Date Range** - Tasks created in time period
-- **Has Issues** - Tasks with SonarLint issues
+- **Has Issues** - Tasks with SonarQube for IDE issues
 
 ### Saved Filters
 
