@@ -202,6 +202,7 @@ claude --version
 **Report issues:**
 
 Open an issue on GitHub with:
+
 - Problem description and steps to reproduce
 - Version information
 - Relevant log excerpts (sanitize sensitive data)
