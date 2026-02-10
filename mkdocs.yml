@@ -1,6 +1,6 @@
-site_name: Kintsugi Documentation
-site_description: Automated Development Environment for Claude Code
-site_author: Kintsugi Team
+site_name: Kintsugi
+site_description: Agentic Development Environment for Claude Code
+site_author: Sonar
 site_url: https://sonarsource.github.io/kintsugi-docs
 
 repo_name: SonarSource/kintsugi-docs
@@ -124,23 +124,6 @@ markdown_extensions:
 
 nav:
   - Home: index.md
-  - Getting Started:
-      - Installation: getting-started.md
-      - Quick Reference: quick-reference.md
-  - Core Features:
-      - Features Overview: features.md
-      - Workflows: workflows.md
-      - Configuration: configuration.md
-  - Integrations:
-      - Setup Guide: integrations.md
-      - SonarQube: integrations.md#sonarqube-integration
-      - JIRA: integrations.md#jira-integration
-      - GitHub: integrations.md#github-integration
-  - Advanced:
-      - Architecture: architecture.md
-      - Data & Privacy: data-privacy.md
-  - Help:
-      - Troubleshooting: troubleshooting.md
 
 extra:
   social:

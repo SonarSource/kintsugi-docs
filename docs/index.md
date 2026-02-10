@@ -1,296 +1,226 @@
-# Command the Flux of AI-Generated Code
+# Kintsugi
 
-<div class="hero-subtitle">
-An experimental Agentic Development Environment by Sonar
-</div>
+An Agentic Development Environment for Claude Code that provides visual task management and code quality analysis.
 
----
+## Getting Started
 
-## What is Kintsugi?
+### Requirements
 
-Kintsugi is an ongoing experiment that helps **Claude Code users build like power users** by providing a complete end-to-end workflow to manage and review AI-generated changes with total confidence.
-
-Unlike traditional IDEs that focus on writing code, Kintsugi is an **Agentic Development Environment (ADE)** built for orchestrating AI agents and reviewing their output—not replacing them.
-
-!!! warning "⚡ Experimental Prototype"
-This is a working experimental prototype with limited integrations. You may encounter bugs as we learn and iterate based on real user feedback.
-
----
-
-## Why Kintsugi?
-
-<div class="problem-solution">
-
-### The Challenge
-
-**CLI agents are incredibly powerful.** Tools like Claude Code can generate entire features in seconds. But reviewing that generated code, maintaining quality and security at speed—that takes significant care.
-
-Power users build their own guardrails. **Kintsugi builds them for you.**
-
-</div>
-
----
-
-## Core Philosophy
-
-### CLI Power, GUI Clarity
-
-**You keep using the terminal you love.** Kintsugi adds visual superpowers.
-
-<div class="two-column-grid">
-
-**In Your Terminal:**
-
-- Run Claude Code as normal
-- Submit prompts naturally
-- Use your familiar shell
-
-**In Kintsugi App:**
-
-- See task cards appear automatically
-- Review diffs visually
-- Approve/deny dangerous operations
-- Track token costs
-- Manage parallel sessions
-
-</div>
-
-Kintsugi doesn't replace your terminal—it makes AI-generated code **visible, manageable, and safe**.
-
----
-
-## From Linear to Parallel
-
-### Multi-Threaded Development
-
-Start multiple AI agents working on separate features simultaneously. Kintsugi prevents them from stepping on each other and shows you real-time progress on each task.
-
-**No more context switching.** See all your AI sessions in one visual queue.
-
----
-
-## Sonar-Powered Guardrails
-
-Every line of AI-generated code is analyzed with **SonarQube for IDE integration**—the same technology powering SonarQube. Catch bugs, vulnerabilities, and code smells before they reach your codebase.
-
-<div class="feature-highlight">
-Built by the team at Sonar, Kintsugi infuses your agentic workflow with deep code analysis you can trust.
-</div>
-
----
-
-## What You Can Do
-
-### Go from Idea to PR
-
-<div class="workflow-steps">
-
-**1. Terminal → Prompt**
-Run Claude Code in Kintsugi's integrated terminal, just like you always do.
-
-**2. App → Visual Tasks**
-Watch task cards appear automatically on your Kanban board as Claude works.
-
-**3. App → Review & Approve**
-Review diffs side-by-side, check SonarQube for IDE issues, approve file changes—all visually.
-
-**4. App → Track & Ship**
-See token costs, manage parallel sessions, push to PR when ready.
-
-</div>
-
----
-
-## Requirements
-
-Before you start, make sure you have:
-
-### Required
-
-- **Active Claude Code subscription** - Kintsugi extends Claude Code, you need both
-- **macOS, Windows, or Linux** - Desktop app available for all platforms
+**Required:**
+- **Node.js 22+** and **npm 10+**
+- **Claude Code CLI** - Active subscription and installed CLI
 - **Git** - For repository management
-- **Node.js 22+** - For CLI hooks integration
 
-### Optional (but Recommended)
+**Recommended:**
+- **Java 17+** - For SonarQube for IDE code analysis
+- **jq** - JSON processing tool for CLI hooks
 
-- **Java 17+** - For SonarQube for IDE code analysis (highly recommended!)
-- **SonarQube** - Connect to your team's quality profiles (optional)
-- **JIRA** - Link tasks to tickets (optional)
+### What is Kintsugi?
 
----
+Kintsugi is a desktop application that extends Claude Code with visual task management and automated code quality checks. It works by installing CLI hooks that interact with a local database to track your development workflow.
 
-## Get Started in 3 Steps
+**Key capabilities:**
+- Automatic task tracking as you work with Claude Code
+- Visual Kanban board for managing development workflow
+- Code quality analysis with SonarQube for IDE integration
+- File diff generation and review interface
 
-### 1. Download Kintsugi
+**Note:** The plugin adds approximately 2% to token costs due to hook processing overhead.
+
+### Installation
 
 === "macOS"
-Download the `.dmg` installer, drag to Applications, and launch.
+    Download the `.dmg` installer, drag to Applications, and launch.
 
 === "Windows"
-Download the `.exe` installer, run it, and launch from Start Menu.
+    Download the `.exe` installer and follow the installation wizard.
 
 === "Linux"
-Download `.AppImage` or `.deb` package:
-`bash
+    Download the `.AppImage`:
+    ```bash
     chmod +x Kintsugi-x.y.z.AppImage
     ./Kintsugi-x.y.z.AppImage
-    `
+    ```
 
-### 2. Complete Onboarding
+### Setup
 
 On first launch, Kintsugi will guide you through:
 
-- **Installing CLI hooks** - Connects Claude Code to Kintsugi
-- **Selecting your project** - Choose a Git repository to work with
-- **Optional integrations** - SonarQube, JIRA (can skip for now)
+1. **CLI hooks installation** - Registers hooks in `~/.claude/settings.json` to capture Claude Code events
+2. **Repository selection** - Choose a Git repository to track
+3. **Optional integrations** - Configure SonarQube, JIRA, or GitHub (can be skipped)
 
-The onboarding takes ~2 minutes.
+The setup process creates:
+- Local backend server on port 63421
+- SQLite database at `~/.kintsugi/local.db`
+- Configuration files in `~/.kintsugi/`
 
-### 3. Run Your First AI Session
+### First Session
 
-1. Open the **terminal in Kintsugi** (or use your external terminal)
-2. Navigate to your project: `cd ~/projects/my-app`
-3. Run Claude Code: `claude "Add error handling to the API"`
-4. **Watch Kintsugi automatically:**
-   - Create a task card
-   - Track file changes
-   - Generate diffs
-   - Calculate token costs
-   - Move through workflow stages
+1. Open terminal in Kintsugi or use your system terminal
+2. Navigate to your project
+3. Run Claude Code: `claude "your task description"`
+4. Watch tasks appear automatically on the Kanban board
 
-**That's it!** You're now using Kintsugi.
+## FAQ/Troubleshooting
 
-[📖 Detailed Setup Guide →](getting-started.md){ .md-button .md-button--primary }
+### Local Backend Issues
 
----
+**Backend won't start**
 
-## Help Us Shape It
-
-!!! community "Join the Experiment"
-We're looking for Claude Code users to experiment with Kintsugi and help us understand your pain points, ideas, and opinions.
-
-    **Your feedback shapes what Kintsugi becomes.**
-
-    - Share what works and what doesn't
-    - Request features that matter to you
-    - Report bugs (expect some!)
-    - Join discussions about the future of ADEs
-
----
-
-## What's Inside Kintsugi
-
-### Visual Task Management
-
-**Terminal:** Run Claude Code normally
-**App:** See task cards, drag-and-drop workflow, visual progress
-
-### Code Review Interface
-
-**Terminal:** Claude generates code
-**App:** Side-by-side diffs, syntax highlighting, easy navigation
-
-### Approval Workflow
-
-**Terminal:** Claude requests to write files
-**App:** Approve/deny with preview, modify before accepting
-
-### SonarQube for IDE Analysis
-
-**Terminal:** Code changes happen
-**App:** Instant quality feedback, inline issue markers
-
-### Token Cost Tracking
-
-**Terminal:** API calls to Claude
-**App:** Real-time cost breakdown per task/epic
-
-### Multi-Session Management
-
-**Terminal:** Run multiple Claude sessions
-**App:** Visual queue, parallel task tracking, no conflicts
-
-[Explore All Features →](features.md){ .md-button }
-
----
-
-## The Kintsugi Workflow
-
-Unlike traditional IDEs where you write code, or pure CLI where you only see text streams, Kintsugi combines both worlds:
-
-```mermaid
-graph LR
-    A[You in Terminal] -->|Prompt| B[Claude Code]
-    B -->|Generates Code| C[Kintsugi App]
-    C -->|Visual Review| D{Approve?}
-    D -->|Yes| E[Commit & Ship]
-    D -->|No| A
-    C -->|SonarQube for IDE| F[Quality Check]
-    F --> D
+Check if port is already in use:
+```bash
+lsof -i :63421
 ```
 
-**You stay in control.** AI generates, you review visually, Sonar guards quality.
+If occupied, kill the process:
+```bash
+kill -9 <PID>
+```
 
----
+Verify Node.js version:
+```bash
+node --version  # Should be 22+
+```
 
-## System Requirements
+Check backend logs:
+```bash
+tail -f ~/.kintsugi/local-backend.log
+```
 
-| Component       | Requirement                           |
-| --------------- | ------------------------------------- |
-| **OS**          | macOS 11+, Windows 10+, Ubuntu 20.04+ |
-| **Claude Code** | Active subscription required          |
-| **Node.js**     | Version 22 or higher                  |
-| **Git**         | Any recent version                    |
-| **Java**        | 17+ (optional, for SonarQube for IDE) |
-| **RAM**         | 4GB minimum, 8GB recommended          |
-| **Disk Space**  | 500MB for app + space for snapshots   |
+**Backend crashes repeatedly**
 
----
+Check available disk space and memory. The backend requires at least 256MB RAM.
 
-## What's Next?
+Verify database integrity:
+```bash
+sqlite3 ~/.kintsugi/local.db "PRAGMA integrity_check"
+```
 
-<div class="next-steps-grid">
+If corrupted, backup and recreate:
+```bash
+cp ~/.kintsugi/local.db ~/.kintsugi/local.db.backup
+rm ~/.kintsugi/local.db
+```
 
-<div class="next-step-card">
-<h3>Get Started</h3>
-<p>Install Kintsugi and complete your first AI session with visual feedback</p>
-<a href="getting-started.md">Setup Guide →</a>
-</div>
+Restart Kintsugi to create a fresh database.
 
-<div class="next-step-card">
-<h3>Learn Features</h3>
-<p>Discover what you can do in Kintsugi vs the terminal</p>
-<a href="features.md">Features Overview →</a>
-</div>
+### SonarQube for IDE Issues
 
-<div class="next-step-card">
-<h3>Configure</h3>
-<p>Connect SonarQube, customize settings, integrate JIRA</p>
-<a href="configuration.md">Configuration →</a>
-</div>
+**SonarLint bridge won't start**
 
-<div class="next-step-card">
-<h3>Get Help</h3>
-<p>Troubleshoot issues, join the community, share feedback</p>
-<a href="troubleshooting.md">Troubleshooting →</a>
-</div>
+Verify Java installation:
+```bash
+java --version  # Should be 17+
+```
 
-</div>
+Check if port 8765 is available:
+```bash
+lsof -i :8765
+```
 
----
+If Java is not found, install it:
+- macOS: `brew install openjdk@17`
+- Linux: `apt-get install openjdk-17-jdk`
+- Windows: Download from Oracle or OpenJDK
 
-<div class="footer-cta">
+**Analysis fails or times out**
 
-## Ready to Build Like a Power User?
+Increase analysis timeout in Settings → Code Analysis → Analysis Timeout (default is 120s, try 300s).
 
-Download Kintsugi and experience the future of agentic development.
+Check available system resources. Large files may require more memory.
 
-[Download Now](#){ .md-button .md-button--primary }
-[Read the Docs](getting-started.md){ .md-button }
+Restart SonarLint bridge from Settings → SonarQube for IDE → Restart Bridge.
 
-</div>
+### Application Issues
 
----
+**Need to restart after adding Java**
 
-Questions? Feedback? [GitHub Discussions](https://github.com/SonarSource/kintsugi-docs/discussions) | [Report Issues](https://github.com/SonarSource/kintsugi-docs/issues)
+If you install Java while Kintsugi is running, the application won't detect it automatically. Fully quit and restart Kintsugi to enable SonarQube for IDE features.
+
+**Hooks not firing / Tasks not appearing**
+
+Verify hooks are registered:
+```bash
+cat ~/.claude/settings.json | jq .hooks
+```
+
+Re-register hooks if needed:
+```bash
+kintsugi unregister-hooks
+kintsugi register-hooks
+```
+
+Check hook logs:
+```bash
+tail -f ~/.kintsugi/hook-debug.log
+```
+
+Ensure backend is running:
+```bash
+curl http://localhost:63421/health
+```
+
+**High memory usage**
+
+Archive old completed tasks (Settings → Tasks → Archive).
+
+Reduce terminal scrollback: Settings → Terminal → Scrollback Lines.
+
+Vacuum database periodically:
+```bash
+sqlite3 ~/.kintsugi/local.db "VACUUM"
+```
+
+**Desktop app won't launch**
+
+Clear cache:
+```bash
+rm -rf ~/.kintsugi/cache/
+```
+
+Reset settings (creates backup):
+```bash
+mv ~/.kintsugi/desktop-config.json ~/.kintsugi/desktop-config.json.backup
+```
+
+**Terminal not working**
+
+Try a different shell in Settings → Terminal → Shell (bash vs zsh).
+
+Reset terminal settings: Settings → Terminal → Reset Defaults.
+
+**Diffs not generating**
+
+Verify snapshots are being created:
+```bash
+ls -la ~/.kintsugi/task-snapshots/tasks/<task-id>/
+```
+
+Check that both `.before` and `.after` files exist for modified files.
+
+Re-register hooks if PreToolUse hook is not capturing snapshots.
+
+### Getting Help
+
+**Collect diagnostic information:**
+
+```bash
+kintsugi --version
+node --version
+java --version
+claude --version
+```
+
+**Review logs:**
+- Backend: `~/.kintsugi/local-backend.log`
+- Hooks: `~/.kintsugi/hook-debug.log`
+- Application: Check DevTools (Cmd/Ctrl+Shift+I) Console tab
+
+**Report issues:**
+
+Open an issue on GitHub with:
+- Problem description and steps to reproduce
+- Version information
+- Relevant log excerpts (sanitize sensitive data)
+- Screenshots if applicable
