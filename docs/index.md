@@ -153,11 +153,6 @@ claude
 /exit
 ```
 
-Check hook logs:
-```bash
-tail -f ~/.kintsugi/hook-debug.log
-```
-
 Ensure backend is running:
 ```bash
 curl http://localhost:63421/health
