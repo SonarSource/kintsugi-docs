@@ -158,15 +158,6 @@ Ensure backend is running:
 curl http://localhost:63421/health
 ```
 
-**High memory usage**
-
-Vacuum database periodically:
-```bash
-sqlite3 ~/.kintsugi/local.db "VACUUM"
-```
-
-Delete old tasks from the UI to reduce database size.
-
 **Desktop app won't launch**
 
 Try deleting the SQLite database (this will remove all tasks):
