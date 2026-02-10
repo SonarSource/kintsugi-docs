@@ -8,7 +8,7 @@ An Agentic Development Environment for Claude Code that provides visual task man
 
 **Required:**
 
-- **Node.js 22+** and **npm 10+** - [Download Node.js](https://nodejs.org/)
+- **Node.js 20+** and **npm 10+** - [Download Node.js](https://nodejs.org/)
 - **Claude Code CLI** - Active subscription and installed CLI - [Get Claude Code](https://claude.ai/download)
 - **Git** - For repository management - [Download Git](https://git-scm.com/downloads)
 - **Java 17+** - Required for SonarQube for IDE code analysis - [Download OpenJDK](https://openjdk.org/) or [Oracle JDK](https://www.oracle.com/java/technologies/downloads/)
@@ -52,11 +52,13 @@ The setup process creates:
 
 **Manual plugin installation:**
 
-If the automatic installation fails, you can install the plugin manually:
+If the automatic installation fails, you can install the plugin manually using Claude Code:
 
 ```bash
-npm install -g @kintsugi/plugin
-kintsugi register-hooks
+claude
+/plugin marketplace add /Applications/Kintsugi.app/Contents/Resources/kintsugi-marketplace
+/plugin install kintsugi@kintsugi-marketplace
+/exit
 ```
 
 ### First Session
@@ -84,7 +86,7 @@ kill -9 <PID>
 
 Verify Node.js version:
 ```bash
-node --version  # Should be 22+
+node --version  # Should be 20+
 ```
 
 Check backend logs:
@@ -120,7 +122,7 @@ java --version  # Should be 17+
 
 If Java is not found, install it:
 
-- macOS: `brew install openjdk@17`
+- macOS: `brew install openjdk`
 
 Download from [OpenJDK](https://openjdk.org/) or [Oracle JDK](https://www.oracle.com/java/technologies/downloads/)
 
@@ -143,30 +145,18 @@ Verify hooks are registered using Claude Code:
 claude /plugin
 ```
 
-Re-register hooks if needed:
+Re-install plugin if needed:
 ```bash
-npm install -g @kintsugi/plugin
-kintsugi register-hooks
-```
-
-Check hook logs:
-```bash
-tail -f ~/.kintsugi/hook-debug.log
+claude
+/plugin marketplace add /Applications/Kintsugi.app/Contents/Resources/kintsugi-marketplace
+/plugin install kintsugi@kintsugi-marketplace
+/exit
 ```
 
 Ensure backend is running:
 ```bash
 curl http://localhost:63421/health
 ```
-
-**High memory usage**
-
-Vacuum database periodically:
-```bash
-sqlite3 ~/.kintsugi/local.db "VACUUM"
-```
-
-Delete old tasks from the UI to reduce database size.
 
 **Desktop app won't launch**
 
@@ -185,7 +175,7 @@ Close and reopen the terminal panel. If issues persist, restart the Kintsugi app
 
 Verify snapshots are being created:
 ```bash
-ls -la ~/.kintsugi/task-snapshots/tasks/<task-id>/
+ls -la ~/.kintsugi/task-snapshots/sessions/<session-id>/
 ```
 
 Check that both `.before` and `.after` files exist for modified files.
@@ -212,6 +202,7 @@ claude --version
 **Report issues:**
 
 Open an issue on GitHub with:
+
 - Problem description and steps to reproduce
 - Version information
 - Relevant log excerpts (sanitize sensitive data)
