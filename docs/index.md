@@ -8,7 +8,7 @@ An Agentic Development Environment for Claude Code that provides visual task man
 
 **Required:**
 
-- **Node.js 22+** and **npm 10+** - [Download Node.js](https://nodejs.org/)
+- **Node.js 20+** and **npm 10+** - [Download Node.js](https://nodejs.org/)
 - **Claude Code CLI** - Active subscription and installed CLI - [Get Claude Code](https://claude.ai/download)
 - **Git** - For repository management - [Download Git](https://git-scm.com/downloads)
 - **Java 17+** - Required for SonarQube for IDE code analysis - [Download OpenJDK](https://openjdk.org/) or [Oracle JDK](https://www.oracle.com/java/technologies/downloads/)
@@ -84,7 +84,7 @@ kill -9 <PID>
 
 Verify Node.js version:
 ```bash
-node --version  # Should be 22+
+node --version  # Should be 20+
 ```
 
 Check backend logs:
