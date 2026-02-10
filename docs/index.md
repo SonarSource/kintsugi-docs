@@ -175,7 +175,7 @@ Close and reopen the terminal panel. If issues persist, restart the Kintsugi app
 
 Verify snapshots are being created:
 ```bash
-ls -la ~/.kintsugi/task-snapshots/tasks/<task-id>/
+ls -la ~/.kintsugi/task-snapshots/sessions/<session-id>/
 ```
 
 Check that both `.before` and `.after` files exist for modified files.
