@@ -52,11 +52,13 @@ The setup process creates:
 
 **Manual plugin installation:**
 
-If the automatic installation fails, you can install the plugin manually:
+If the automatic installation fails, you can install the plugin manually using Claude Code:
 
 ```bash
-npm install -g @kintsugi/plugin
-kintsugi register-hooks
+claude
+/plugin marketplace add /Applications/Kintsugi.app/Contents/Resources/kintsugi-marketplace
+/plugin install kintsugi@kintsugi-marketplace
+/exit
 ```
 
 ### First Session
@@ -120,7 +122,7 @@ java --version  # Should be 17+
 
 If Java is not found, install it:
 
-- macOS: `brew install openjdk@17`
+- macOS: `brew install openjdk`
 
 Download from [OpenJDK](https://openjdk.org/) or [Oracle JDK](https://www.oracle.com/java/technologies/downloads/)
 
@@ -143,10 +145,12 @@ Verify hooks are registered using Claude Code:
 claude /plugin
 ```
 
-Re-register hooks if needed:
+Re-install plugin if needed:
 ```bash
-npm install -g @kintsugi/plugin
-kintsugi register-hooks
+claude
+/plugin marketplace add /Applications/Kintsugi.app/Contents/Resources/kintsugi-marketplace
+/plugin install kintsugi@kintsugi-marketplace
+/exit
 ```
 
 Check hook logs:
