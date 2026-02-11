@@ -124,6 +124,7 @@ markdown_extensions:
 
 nav:
   - Home: index.md
+  - Terms: terms.md
 
 extra:
   social:
