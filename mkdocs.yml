@@ -131,9 +131,6 @@ extra:
     - icon: fontawesome/brands/github
       link: https://github.com/SonarSource/kintsugi-docs
       name: GitHub
-    - icon: fontawesome/brands/discord
-      link: https://discord.gg/sonarsource
-      name: Discord Community
   version:
     provider: mike
   status:
